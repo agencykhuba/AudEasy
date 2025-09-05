@@ -1,9 +1,5 @@
-import pandas as pd
-
-def audit(data):
-    print("Auditing with AudEasy:", data)
-
-if __name__ == "__main__":
-    print("Welcome to AudEasy!")
-    audit(pd.DataFrame({"value": [1, 2, 3]}))
-print("Enhanced AudEasy feature")
+from fastapi import FastAPI
+app = FastAPI()
+@app.get("/hello")
+async def read_root():
+    return {"message": "Hello, AudEasy Backend!"}
