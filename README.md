@@ -1,3 +1,3 @@
 # AudEasy
 
-A tool for streamlined auditing processes.
+Streamlined auditing tool built with Python.
