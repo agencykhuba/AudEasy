@@ -6,3 +6,4 @@ def audit(data):
 if __name__ == "__main__":
     print("Welcome to AudEasy!")
     audit(pd.DataFrame({"value": [1, 2, 3]}))
+print("Enhanced AudEasy feature")
