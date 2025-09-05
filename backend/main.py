@@ -10,4 +10,4 @@ async def read_root():
 @app.get("/audit")
 async def audit():
     df = pd.DataFrame({"value": [1, 2, 3]})
-    return {"sum": int(df.sum())}
+    return {"sum": int(df.sum().iloc[0])}
