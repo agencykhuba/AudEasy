@@ -40,5 +40,6 @@
             "progress_percentage: Float, calculated as (completed_items / total_items) * 100."
         ]
     },
-    "external_data_link": "https://docs.google.com/spreadsheets/d/1lkKPNZ70Y73SjWMAbg1Mnu5WybSwwNUfp4TTAQPe7G0/edit?usp=sharing"
+    	"external_data_link": "https://docs.google.com/spreadsheets/d/1lkKPNZ70Y73SjWMAbg1Mnu5WybSwwNUfp4TTAQPe7G0/edit?usp=sharing",
+	"data_plan": "Start with manual, add imports later"
 }
