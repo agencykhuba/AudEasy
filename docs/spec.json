@@ -22,10 +22,22 @@
         "summaries": "Scores like total/actual/% per section, from Summary sheet.",
         "car_plans": "Structured data for non-conformances, root causes, actions (from CAR docs).",
         "storage": "Persistent backend for audits, user data; support for offline drafts."
+    },
+    "data_sources": [
+        "Manual entry: Primary input via mobile app forms for checklist responses, remarks, and CAR details.",
+        "Excel import: Initial migration from AM'SExcellenceChecklist-Rev.xlsx (e.g., stores, checklist templates).",
+        "User input: Authentication details, store selections during audits.",
+        "Future: Google Sheets integration for real-time syncing of summaries or reports (post-MVP)."
+    ],
+    "progress_tracking": {
+        "method": "Simple checklist progress",
+        "description": "Track completion of checklist items per audit (e.g., percentage of 119 items answered, calculated as number of yes/no responses divided by total items). Display progress as a percentage in the UI (e.g., '43% complete') during data entry. Store progress in backend with each audit draft/submission.",
+        "ui_component": "Circular progress indicator with 100px diameter, #AB47BC arc, and 16px #FFFFFF text for percentage, centered on #1E1E1E base (per Base44 UI specs).",
+        "data_fields": [
+            "audit_id: Unique identifier for each audit session (e.g., AUD-YYYYMMDD-XXX).",
+            "completed_items: Integer count of answered checklist items.",
+            "total_items: Integer count of total checklist items (e.g., 119).",
+            "progress_percentage: Float, calculated as (completed_items / total_items) * 100."
+        ]
     }
-}  "data_sources": [
-    "Manual entry: Primary input via mobile app forms for checklist responses, remarks, and CAR details.",
-    "Excel import: Initial migration from AM'SExcellenceChecklist-Rev.xlsx (e.g., stores, checklist templates).",
-    "User input: Authentication details, store selections during audits.",
-    "Future: Google Sheets integration for real-time syncing of summaries or reports (post-MVP)."
-]
+}
