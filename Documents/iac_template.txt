@@ -1,0 +1,10 @@
+<!-- Copy Button -->
+<button onclick="navigator.clipboard.writeText(document.getElementById('iac_template').innerText)">Copy</button>
+<pre id="iac_template">
+Infrastructure as Code (IaC) Template:
+- Provider: Render.com (free tier)
+- Resources: Web service for AudEasy app
+- Configuration: Auto-scaling, 512MB RAM, 1 CPU
+- Deployment: GitHub integration, auto-build on push
+- Backup: Daily snapshots
+</pre>

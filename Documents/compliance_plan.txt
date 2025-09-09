@@ -1,0 +1,10 @@
+<!-- Copy Button -->
+<button onclick="navigator.clipboard.writeText(document.getElementById('compliance_plan').innerText)">Copy</button>
+<pre id="compliance_plan">
+Compliance Plan:
+- Regulation: GDPR
+- Requirements: No data sharing without consent, maintain audit logs for 2 years
+- Implementation: Encrypt user data, restrict access, log all audit actions
+- Monitoring: Monthly compliance checks, automated log audits
+- Enforcement: User consent forms, data deletion on request
+</pre>

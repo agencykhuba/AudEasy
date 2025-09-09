@@ -1,0 +1,13 @@
+<!-- Copy Button -->
+<button onclick="navigator.clipboard.writeText(document.getElementById('workflow_plan').innerText)">Copy</button>
+<pre id="workflow_plan">
+SLM Workflow Plan:
+- Input: Niche description (e.g., audit app) and requirements
+- Step 1: Generate spec (prompt 1, spec.json)
+- Step 2: Generate schema (prompt 6, schema.drawio)
+- Step 3: Generate code/tests (prompts 4-5, app.py, tests.py)
+- Step 4: Automate CI/CD (ci.yml)
+- Step 5: Deploy (Render.com)
+- Output: Functional app (e.g., AudEasy)
+- Reusability: Adapt prompts for new niches
+</pre>

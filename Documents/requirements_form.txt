@@ -1,0 +1,12 @@
+Features:
+- Store audit reports
+- User login with password
+- View list of audits
+- Log corrective actions (CAPA)
+- Export data to CSV
+Users:
+- Auditors
+- Small business managers
+Data Needs:
+- Audit forms (issue, action, date)
+- User credentials

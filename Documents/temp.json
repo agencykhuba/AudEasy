@@ -1,0 +1,13 @@
+{
+    {
+        "feature": "user login",
+        "description": "secure authentication for area managers",
+        "priority": 1,
+        "details": {
+            "type": "basic",
+            "methods": [
+                "username/password",
+                "email"
+            ]
+        }
+    }

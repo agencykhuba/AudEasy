@@ -1,0 +1,9 @@
+<!-- Copy Button -->
+<button onclick="navigator.clipboard.writeText(document.getElementById('data_strategy').innerText)">Copy</button>
+<pre id="data_strategy">
+Data Strategy:
+- Sources: Manual entry, CSV imports (from spec.json)
+- Quality: Check for blank entries, validate issue/action fields
+- Storage: Use SQLite initially, migrate to PostgreSQL for scale
+- Maintenance: Manual duplicate checks weekly, automated validation later
+</pre>

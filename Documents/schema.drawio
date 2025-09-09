@@ -1,0 +1,19 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36" version="28.2.0">
+  <diagram id="R2lEEEUBdFMjLlhIrx00" name="AudEasy_ERD">
+    <mxGraphModel dx="1042" dy="579" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="qZ6jDr2xPO8f5nd3XCBl-4" value="Users&#xa;---&#xa;ID: integer (PK)&#xa;username: string&#xa;password: string" style="shape=table;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="120" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="qZ6jDr2xPO8f5nd3XCBl-5" value="Audits&#xa;---&#xa;ID: integer (PK)&#xa;issue: string&#xa;action: string&#xa;company_id: integer (FK)" style="shape=table;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="120" width="220" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="qZ6jDr2xPO8f5nd3XCBl-6" value="1:N" style="endArrow=block;html=1;strokeColor=#000000;" edge="1" parent="1" source="qZ6jDr2xPO8f5nd3XCBl-4" target="qZ6jDr2xPO8f5nd3XCBl-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

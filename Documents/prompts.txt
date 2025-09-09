@@ -1,0 +1,6 @@
+1. Generate a JSON spec for an app in [niche, e.g., small business audits]: [describe needs]
+2. Suggest 5 features for an app in [niche]
+3. Analyze this spec for feasibility: [paste spec.json]
+4. Generate Flask code for [feature, e.g., login]
+5. Create pytest tests for [feature, e.g., audit form]
+6. Generate schema for small business audits app: Needs tables for users (ID: integer PK, username: string, password: string) and audits (ID: integer PK, issue: string, action: string, company_id: integer FK) with a 1:N relationship from users.ID to audits.company_id for multi-tenant support.

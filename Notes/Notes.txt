@@ -1,0 +1,8 @@
+Hello, this is my SLM workflow notes
+
+AudEasy Notes:
+- Purpose: Replace paper-based audit tracking
+- Users: Auditors, store managers, area managers
+- Pain Points: Slow manual audits, lost paperwork, no photo handler
+- MVP Features: Login, audit form, audit list, 
+CAPA-oriented tracking

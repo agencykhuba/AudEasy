@@ -1,0 +1,9 @@
+Security Checklist:
+- Use strong passwords (min 12 characters)
+- Encrypt sensitive data (bcrypt for passwords)
+- Implement HTTPS login
+- Validate inputs to prevent injection (e.g., SQL injection)
+- Regular backups of audit data
+- Restrict admin access to user management
+Compliance:
+- GDPR: No data sharing without consent; maintain audit logs for 2 years

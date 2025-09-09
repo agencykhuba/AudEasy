@@ -1,0 +1,20 @@
+{
+  "mvp_features": [
+    "audit form",
+    "audit list",
+    "login",
+    "CAPA tracking",
+    "CSV export"
+  ],
+  "problem_statement": "AudEasy addresses the inefficiencies of manual audit tracking in small businesses by providing a digital app for auditors and managers. Paper-based audits are slow, prone to errors, and difficult to track, often leading to lost paperwork and delayed corrective actions. AudEasy offers a simple interface for logging audit issues, tracking corrective and preventive actions (CAPA), and viewing audit summaries, saving time and improving compliance. With secure login, audit forms, and exportable reports, it streamlines processes for small teams, ensuring data is organized and accessible.",
+  "users": [
+    "auditors",
+    "small business managers",
+    "compliance officers"
+  ],
+  "data_sources": [
+    "manual entry",
+    "CSV imports"
+  ],
+  "progress": "workflow checklist"
+}
