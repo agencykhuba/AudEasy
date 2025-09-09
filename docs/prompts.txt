@@ -1,3 +1,5 @@
 1. Analyze spec.json for completeness
 2. Validate checklist items against data_needs
 3. Generate summary from temp.json data
+4. Identify missing car_plans details in spec.json
+5. Suggest improvements for progress_tracking UI
