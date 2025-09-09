@@ -5,7 +5,7 @@
         "View Audit List/Summary: A basic list or summary view of submitted audits, showing scores or completion status per category (e.g., total/actual/% from the Summary sheet). (Why: Provides Area Managers with instant insights, aiding decision-making and tracking progress across stores.)",
         "Basic Data Submission and Storage: Secure submission of entered data to a backend (e.g., SQLite or simple database), with offline draft saving if possible. (Why: Ensures data integrity and availability, supporting offline audits in areas with poor connectivity.)"
     ],
-    "problem_statement": "AudEasy solves manual audit tracking by providing a simple digital tool for Area Managers to streamline restaurant performance evaluations, replacing cumbersome Excel-based checklists with an intuitive mobile app. In the current setup, as detailed in the AM's Excellence Checklist analysis, managers rely on spreadsheets like AM'SExcellenceChecklist-Rev.xlsx, which include over 119 checklist items across categories such as Customer Delight & Operations Excellence, Admin & Financial Control, and People Development & QA Compliance. This manual process leads to inefficiencies: time-consuming data entry, error-prone calculations (e.g., compliance scores from 18-40 items per category), delayed insights, and challenges in tracking trends across 58 stores and 5 Area Managers. Paper or Excel audits also hinder real-time collaboration, increase compliance risks in food safety (e.g., HACCP deviations outlined in the CAR Corrective Action Plan), and make it difficult to implement corrective actions promptly. AudEasy addresses these pain points by digitizing the workflow into a mobile-first platform with secure login, store selection, and structured data entry for yes/no responses and remarks. Users can submit audits instantly, view basic summaries, and generate simple reports, reducing completion time by up to 50% as targeted in the success criteria. Built on a scalable backend (e.g., Python/FastAPI with PostgreSQL), it ensures data accuracy, offline capabilities, and easy migration from existing Excel data. Ultimately, AudEasy empowers managers to focus on actionable improvements, like root cause analysis for non-conformances (e.g., via integrated CAR plans with sections for identification, root cause, and verification), fostering better operational excellence, food safety compliance, and decision-making in fast-paced restaurant environments.",
+    "problem_statement": "AudEasy streamlines manual audit tracking with a digital tool, replacing Excel checklists with a mobile app for Area Managers. Managers currently use AM'SExcellenceChecklist-Rev.xlsx with 119 items across categories like Customer Delight & Operations Excellence, Admin & Financial Control, and People Development & QA Compliance, facing inefficiencies such as slow entry, errors, delayed insights, and tracking issues across 58 stores and 5 managers. AudEasy offers secure login, store selection, and structured data entry for instant submissions, summaries, and reports, cutting completion time by 50%. Built on a scalable backend (e.g., Python/FastAPI with PostgreSQL), it ensures data accuracy, offline support, and Excel migration. It empowers managers with actionable insights via CAR plans, boosting operational excellence, food safety, and decision-making.",
     "users": [
         "Area Managers: Primary users (e.g., 5 unique AMs like Rupesh, Saurav) who perform audits on stores.",
         "Store Managers/Staff: Secondary users for viewing summaries or responding to CAR plans.",
@@ -34,12 +34,13 @@
         "description": "Track completion of checklist items per audit (e.g., percentage of 119 items answered, calculated as number of yes/no responses divided by total items). Display progress as a percentage in the UI (e.g., '43% complete') during data entry. Store progress in backend with each audit draft/submission.",
         "ui_component": "Circular progress indicator with 100px diameter, #AB47BC arc, and 16px #FFFFFF text for percentage, centered on #1E1E1E base (per Base44 UI specs).",
         "data_fields": [
-            "audit_id: Unique identifier for each audit session (e.g., AUD-YYYYMMDD-XXX).",
-            "completed_items: Integer count of answered checklist items.",
-            "total_items: Integer count of total checklist items (e.g., 119).",
-            "progress_percentage: Float, calculated as (completed_items / total_items) * 100."
+            "audit_id": "Unique identifier for each audit session (e.g., AUD-YYYYMMDD-XXX).",
+            "completed_items": "Integer count of answered checklist items.",
+            "total_items": "Integer count of total checklist items (e.g., 119).",
+            "progress_percentage": "Float, calculated as (completed_items / total_items) * 100."
         ]
     },
     "external_data_link": "https://docs.google.com/spreadsheets/d/1lkKPNZ70Y73SjWMAbg1Mnu5WybSwwNUfp4TTAQPe7G0/edit?usp=sharing",
-    "data_plan": "Start with manual, add imports later"
+    "data_plan": "Start with manual, add imports later",
+    "data_strategy": "Placeholder: Detailed strategy to be defined in data_strategy.txt"
 }
