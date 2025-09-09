@@ -42,5 +42,5 @@
     },
     "external_data_link": "https://docs.google.com/spreadsheets/d/1lkKPNZ70Y73SjWMAbg1Mnu5WybSwwNUfp4TTAQPe7G0/edit?usp=sharing",
     "data_plan": "Start with manual, add imports later",
-    "data_strategy": "Placeholder: Detailed strategy to be defined in data_strategy.txt"
+    "data_strategy": "Ensure data cleanliness by manually checking for duplicates in 119 checklist items weekly. Validate all user inputs for consistency before submission. Plan to automate import validation post-MVP."
 }
