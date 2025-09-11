@@ -1,0 +1,7 @@
+audeasy_env/
+__pycache__/
+*.pyc
+*.log
+backend/venv/
+node_modules/
+package-lock.json
