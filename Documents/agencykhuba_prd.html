@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agency Khuba PRD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto p-6 max-w-4xl">
+        <h1 class="text-4xl font-bold text-gray-800 mb-6">Agency Khuba Product Requirements Document (PRD)</h1>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">1. Project Specifics</h2>
+            <ul class="list-disc pl-6">
+                <li><strong>Participants:</strong> Chief Leader (solo entrepreneur), SLM Central AI (orchestrator),
+                    Departments (Execution, Troubleshooting, Improvement, Security, External Audit), Stakeholders
+                    (future hires, clients).</li>
+                <li><strong>Status:</strong> On target (Phase 3 MVP in progress, backend testing).</li>
+                <li><strong>Target Release:</strong> Q4 2025 (full SLM workflow MVP for multi-niche apps).</li>
+            </ul>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">2. Team Goals and Business Objectives</h2>
+            <p>Automate app development across niches as a virtual DevOps team, reducing manual effort for solo
+                entrepreneur while enabling horizontal scaling with hires. Achieve 80% automation in Phase 3 for AudEasy
+                pilot, with SLM-driven code generation, testing, and governance.</p>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">3. Background and Strategic Fit</h2>
+            <p><strong>Why:</strong> Current Excel-based auditing (AudEasy pilot) is inefficient; Agency Khuba provides
+                a reusable, AI-assisted SLM template for any niche, transforming manual workflows into automated,
+                scalable solutions.</p>
+            <p><strong>Strategic Fit:</strong> Aligns with company growth (solo to multi-client), leveraging modern AI
+                (Phi-2) and cloud (Render.com) for horizontal scaling, with departments handled by open-source tools.
+            </p>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">4. Assumptions</h2>
+            <ul class="list-disc pl-6">
+                <li><strong>Technical:</strong> SLM (Phi-2) generates reliable code; PostgreSQL schema (<a
+                        href="Documents/database_schema.sql"
+                        class="text-blue-500 hover:underline">database_schema.sql</a>) supports UUID/ENUM for audits.
+                </li>
+                <li><strong>Business:</strong> Solo entrepreneur directs via signals; hires integrate into departments
+                    as clients grow.</li>
+                <li><strong>User:</strong> Central AI "knows" past/present/future states via logs, trends, predictions.
+                </li>
+            </ul>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">5. User Stories</h2>
+            <ul class="list-disc pl-6">
+                <li>As a Chief Leader, I want SLM to generate code/tests from prompts, so I can initiate development
+                    without manual coding.</li>
+                <li>As a Troubleshooting Dept., I want pytest to validate endpoints, so backend reliability is ensured.
+                </li>
+                <li>As an External Audit, I want read-only GitHub logs, so world-class oversight is possible without
+                    execution interference.</li>
+                <li><strong>Success Metrics:</strong> 90% test pass rate; 50% time savings in Phase 3; scalable to 3
+                    niches by Q1 2026. Link to <a href="Documents/spec.json"
+                        class="text-blue-500 hover:underline">spec.json</a> for full stories.</li>
+            </ul>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">6. User Interaction and Design</h2>
+            <p><strong>Interaction:</strong> Chief Leader inputs signals (prompts) to central AI; departments execute
+                (e.g., SLM code gen via <a href="Code/workflow_generate.py"
+                    class="text-blue-500 hover:underline">workflow_generate.py</a>); feedback loops via pytest/GitHub.
+            </p>
+            <p><strong>Design:</strong> Modular dashboard (Confluence/Jira) for status; wireframes in <a
+                    href="Documents/schema.drawio" class="text-blue-500 hover:underline">schema.drawio</a> for SLM flow.
+            </p>
+            <p>Link to customer interviews: <a href="Documents/notes.txt"
+                    class="text-blue-500 hover:underline">notes.txt</a>.</p>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">7. Questions</h2>
+            <table class="w-full border-collapse">
+                <thead>
+                    <tr class="bg-gray-200">
+                        <th class="border p-2">Item</th>
+                        <th class="border p-2">Status</th>
+                        <th class="border p-2">Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border p-2">SLM fallback for low-confidence output?</td>
+                        <td class="border p-2">Open</td>
+                        <td class="border p-2">Add human oversight threshold in workflow_generate.py.</td>
+                    </tr>
+                    <tr>
+                        <td class="border p-2">Integration with Jira?</td>
+                        <td class="border p-2">Research</td>
+                        <td class="border p-2">Link to Jira for Phase 4 CI/CD.</td>
+                    </tr>
+                    <tr>
+                        <td class="border p-2">Scaling for 10+ niches?</td>
+                        <td class="border p-2">Decide</td>
+                        <td class="border p-2">Microservices for departments in Phase 7.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">8. What We're Not Doing</h2>
+            <ul class="list-disc pl-6">
+                <li>Detailed implementation specs (left to SLM/departments).</li>
+                <li>Non-AI tools for execution (focus on open-source SLM).</li>
+                <li>Multi-tenant setup in MVP (add in Phase 7).</li>
+                <li>Full UI design (focus on backend for AudEasy pilot; frontend in Day 2).</li>
+            </ul>
+        </section>
+    </div>
+</body>
+
+</html>
