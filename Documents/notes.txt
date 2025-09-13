@@ -1,0 +1,5 @@
+AudEasy Project Notes
+- Problem: Manual Excel-based auditing is time-consuming.
+- Users: Auditors, store managers, area managers.
+- Pain Points: Offline access, real-time updates, CAPA automation.
+- MVP Features: Login, audit form, audit list, CAPA.
