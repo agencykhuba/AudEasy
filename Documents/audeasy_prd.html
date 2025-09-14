@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AudEasy PRD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto p-6 max-w-4xl">
+        <h1 class="text-4xl font-bold text-gray-800 mb-6">AudEasy Product Requirements Document (PRD)</h1>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">1. Project Specifics</h2>
+            <ul class="list-disc pl-6">
+                <li><strong>Participants:</strong> Chief Leader (solo entrepreneur), SLM Central AI, Departments
+                    (Execution, Troubleshooting), Stakeholders (auditors, store managers, clients).</li>
+                <li><strong>Status:</strong> On target (Phase 3 backend MVP complete, testing in progress).</li>
+                <li><strong>Target Release:</strong> Q4 2025 (MVP with login, audit form, list, CAPA).</li>
+            </ul>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">2. Team Goals and Business Objectives</h2>
+            <p>Transform Excel-based auditing into a mobile-first, AI-powered app with offline capability and CAR
+                automation. Achieve 85% compliance score in MVP audits, integrate SLM for predictive analytics, and
+                scale to multi-store use.</p>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">3. Background and Strategic Fit</h2>
+            <p><strong>Why:</strong> Current Excel workflows are inefficient for field auditors; AudEasy as Agency Khuba
+                pilot enables AI-assisted audits with CAPA for food safety niches.</p>
+            <p><strong>Strategic Fit:</strong> Tests Agency Khuba's SLM workflow; expands to retail/manufacturing
+                niches, supporting client growth with ROI (time savings, quality improvements).</p>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">4. Assumptions</h2>
+            <ul class="list-disc pl-6">
+                <li><strong>Technical:</strong> Flutter for cross-platform mobile, FastAPI for backend, PostgreSQL
+                    schema for offline sync.</li>
+                <li><strong>Business:</strong> Auditors need offline access; critical failures trigger auto-CAR.</li>
+                <li><strong>User:</strong> Area managers prioritize real-time dashboards; compliance level drives
+                    notifications.</li>
+            </ul>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">5. User Stories</h2>
+            <ul class="list-disc pl-6">
+                <li>As an auditor, I want to log in securely, so I can access checklists offline.</li>
+                <li>As a store manager, I want to submit audits with photos/comments, so non-conformances trigger CARs.
+                </li>
+                <li>As an area manager, I want a dashboard with scores/trends, so I can monitor compliance.</li>
+                <li><strong>Success Metrics:</strong> 95% offline submission success; 80% test pass rate. Link to <a
+                        href="Documents/spec.json" class="text-blue-500 hover:underline">spec.json</a>.</li>
+            </ul>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">6. User Interaction and Design</h2>
+            <p><strong>Interaction:</strong> Mobile login (Firebase Auth), checklist form (camera integration),
+                submission with sync, dashboard (React + D3.js for trends).</p>
+            <p><strong>Design:</strong> Wireframes in <a href="Documents/schema.drawio"
+                    class="text-blue-500 hover:underline">schema.drawio</a>; progressive disclosure for CAR workflow.
+            </p>
+            <p>Link to customer interviews: <a href="Documents/notes.txt"
+                    class="text-blue-500 hover:underline">notes.txt</a>.</p>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">7. Questions</h2>
+            <table class="w-full border-collapse">
+                <thead>
+                    <tr class="bg-gray-200">
+                        <th class="border p-2">Item</th>
+                        <th class="border p-2">Status</th>
+                        <th class="border p-2">Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border p-2">Offline sync conflicts?</td>
+                        <td class="border p-2">Open</td>
+                        <td class="border p-2">Last-write-wins in sync_status ENUM.</td>
+                    </tr>
+                    <tr>
+                        <td class="border p-2">AI confidence for CAR suggestions?</td>
+                        <td class="border p-2">Research</td>
+                        <td class="border p-2">Add in Phase 3 AI integration.</td>
+                    </tr>
+                    <tr>
+                        <td class="border p-2">Multi-language support?</td>
+                        <td class="border p-2">Decide</td>
+                        <td class="border p-2">English for MVP; add in Phase 4.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">8. What We're Not Doing</h2>
+            <ul class="list-disc pl-6">
+                <li>Advanced AI analytics (predictive models in Phase 3; full in Phase 4).</li>
+                <li>Web version (focus on mobile MVP; web dashboard in Phase 2).</li>
+                <li>Multi-tenant features (single-user for pilot; scale in Phase 7).</li>
+                <li>Custom hardware integration (standard camera for photos).</li>
+            </ul>
+        </section>
+    </div>
+</body>
+
+</html>
