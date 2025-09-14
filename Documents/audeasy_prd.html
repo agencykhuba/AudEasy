@@ -9,105 +9,61 @@
 </head>
 
 <body class="bg-gray-100 font-sans">
-    <div class="container mx-auto p-6 max-w-4xl">
+    <div class="container mx-auto p-6 max-w-6xl">
         <h1 class="text-4xl font-bold text-gray-800 mb-6">AudEasy Product Requirements Document (PRD)</h1>
+        <p class="text-xl text-gray-600 mb-4">Pilot project for Agency Khuba’s SLM-centered, automated DevOps workflow.
+        </p>
 
         <section class="bg-white p-6 rounded-lg shadow-md mb-6">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">1. Project Specifics</h2>
-            <ul class="list-disc pl-6">
-                <li><strong>Participants:</strong> Chief Leader (solo entrepreneur), SLM Central AI, Departments
-                    (Execution, Troubleshooting), Stakeholders (auditors, store managers, clients).</li>
-                <li><strong>Status:</strong> On target (Phase 3 backend MVP complete, testing in progress).</li>
-                <li><strong>Target Release:</strong> Q4 2025 (MVP with login, audit form, list, CAPA).</li>
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Project Specifics</h2>
+            <p class="text-gray-600">AudEasy is a mobile-first, AI-powered auditing platform with CAPA/CAR
+                functionality, transforming Excel-based auditing into a scalable, automated solution.</p>
+            <ul class="list-disc list-inside text-gray-600 mt-2">
+                <li>Secure user login for auditors, area managers, and admins.</li>
+                <li>Automated audit submission with offline support.</li>
+                <li>SLM-driven code generation for backend and testing.</li>
+                <li>Cloud deployment with CI/CD for scalability.</li>
             </ul>
         </section>
 
         <section class="bg-white p-6 rounded-lg shadow-md mb-6">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">2. Team Goals and Business Objectives</h2>
-            <p>Transform Excel-based auditing into a mobile-first, AI-powered app with offline capability and CAR
-                automation. Achieve 85% compliance score in MVP audits, integrate SLM for predictive analytics, and
-                scale to multi-store use.</p>
-        </section>
-
-        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">3. Background and Strategic Fit</h2>
-            <p><strong>Why:</strong> Current Excel workflows are inefficient for field auditors; AudEasy as Agency Khuba
-                pilot enables AI-assisted audits with CAPA for food safety niches.</p>
-            <p><strong>Strategic Fit:</strong> Tests Agency Khuba's SLM workflow; expands to retail/manufacturing
-                niches, supporting client growth with ROI (time savings, quality improvements).</p>
-        </section>
-
-        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">4. Assumptions</h2>
-            <ul class="list-disc pl-6">
-                <li><strong>Technical:</strong> Flutter for cross-platform mobile, FastAPI for backend, PostgreSQL
-                    schema for offline sync.</li>
-                <li><strong>Business:</strong> Auditors need offline access; critical failures trigger auto-CAR.</li>
-                <li><strong>User:</strong> Area managers prioritize real-time dashboards; compliance level drives
-                    notifications.</li>
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Team Goals</h2>
+            <p class="text-gray-600">Develop a reliable backend by Q4 2025, deploy to cloud by Q1 2026, and scale to 3–5
+                niches (e.g., paralegal, transcription).</p>
+            <ul class="list-disc list-inside text-gray-600 mt-2">
+                <li>100% test coverage for backend endpoints.</li>
+                <li>95% offline submission success rate.</li>
+                <li>Automated code generation with SLM (Phi-2).</li>
+                <li>CI/CD pipeline for testing/deployment.</li>
             </ul>
         </section>
 
         <section class="bg-white p-6 rounded-lg shadow-md mb-6">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">5. User Stories</h2>
-            <ul class="list-disc pl-6">
-                <li>As an auditor, I want to log in securely, so I can access checklists offline.</li>
-                <li>As a store manager, I want to submit audits with photos/comments, so non-conformances trigger CARs.
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Phase 3: Workflow & Code Generation (Completed)</h2>
+            <p class="text-gray-600">Objective: Set up and validate the AudEasy backend with /login and /audit
+                endpoints.</p>
+            <ul class="list-disc list-inside text-gray-600 mt-2">
+                <li>PostgreSQL 16.10 installed, `audeasy` database created, schema applied
+                    (`Documents/database_schema.sql`).</li>
+                <li>Test user inserted with valid `bcrypt` hash (`Code/insert_test_user.py`, validated with
+                    `Code/validate_hash.py`).</li>
+                <li>Pager issue fixed (`export PAGER=cat` in `.bashrc`).</li>
+                <li>`app.py` implemented with /login (HTTP 200/401) and /audit (HTTP 200/500) endpoints.</li>
+                <li>Tests generated (`Code/test_generate.py`), fixed (`Code/tests.py`), and passed (4/4 via `pytest`).
                 </li>
-                <li>As an area manager, I want a dashboard with scores/trends, so I can monitor compliance.</li>
-                <li><strong>Success Metrics:</strong> 95% offline submission success; 80% test pass rate. Link to <a
-                        href="Documents/spec.json" class="text-blue-500 hover:underline">spec.json</a>.</li>
+                <li>PRDs (`agencykhuba_prd.html`, `audeasy_prd.html`) and `README.md` committed (`a7727bd`).</li>
             </ul>
-        </section>
-
-        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">6. User Interaction and Design</h2>
-            <p><strong>Interaction:</strong> Mobile login (Firebase Auth), checklist form (camera integration),
-                submission with sync, dashboard (React + D3.js for trends).</p>
-            <p><strong>Design:</strong> Wireframes in <a href="Documents/schema.drawio"
-                    class="text-blue-500 hover:underline">schema.drawio</a>; progressive disclosure for CAR workflow.
-            </p>
-            <p>Link to customer interviews: <a href="Documents/notes.txt"
-                    class="text-blue-500 hover:underline">notes.txt</a>.</p>
-        </section>
-
-        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">7. Questions</h2>
-            <table class="w-full border-collapse">
-                <thead>
-                    <tr class="bg-gray-200">
-                        <th class="border p-2">Item</th>
-                        <th class="border p-2">Status</th>
-                        <th class="border p-2">Notes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="border p-2">Offline sync conflicts?</td>
-                        <td class="border p-2">Open</td>
-                        <td class="border p-2">Last-write-wins in sync_status ENUM.</td>
-                    </tr>
-                    <tr>
-                        <td class="border p-2">AI confidence for CAR suggestions?</td>
-                        <td class="border p-2">Research</td>
-                        <td class="border p-2">Add in Phase 3 AI integration.</td>
-                    </tr>
-                    <tr>
-                        <td class="border p-2">Multi-language support?</td>
-                        <td class="border p-2">Decide</td>
-                        <td class="border p-2">English for MVP; add in Phase 4.</td>
-                    </tr>
-                </tbody>
-            </table>
         </section>
 
         <section class="bg-white p-6 rounded-lg shadow-md">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">8. What We're Not Doing</h2>
-            <ul class="list-disc pl-6">
-                <li>Advanced AI analytics (predictive models in Phase 3; full in Phase 4).</li>
-                <li>Web version (focus on mobile MVP; web dashboard in Phase 2).</li>
-                <li>Multi-tenant features (single-user for pilot; scale in Phase 7).</li>
-                <li>Custom hardware integration (standard camera for photos).</li>
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Phase 4: Deployment & CI/CD (In Progress)</h2>
+            <p class="text-gray-600">Objective: Deploy AudEasy backend to a cloud platform (e.g., Render) and set up
+                CI/CD with GitHub Actions.</p>
+            <ul class="list-disc list-inside text-gray-600 mt-2">
+                <li>Create GitHub Actions workflow (`.github/workflows/ci.yml`) for automated testing.</li>
+                <li>Deploy Flask app to Render with PostgreSQL integration.</li>
+                <li>Update `README.md` with deployment steps.</li>
+                <li>Enhance SLM prompts for niche-specific code generation (e.g., paralegal, transcription).</li>
             </ul>
         </section>
     </div>
