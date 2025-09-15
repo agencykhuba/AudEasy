@@ -23,7 +23,7 @@ jobs:
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
-          --health-retries 10
+          --health-retries 15
 
     steps:
     - uses: actions/checkout@v4
@@ -37,17 +37,17 @@ jobs:
         pip install -r requirements.txt
     - name: Wait for PostgreSQL
       run: |
-        timeout 60s bash -c 'until pg_isready -h localhost -p 5432; do sleep 1; done'
+        timeout 60s bash -c 'until pg_isready -h localhost -p 5432 -U postgres; do sleep 1; done'
     - name: Apply database schema
       run: |
-        psql -h localhost -U postgres -d audeasy -f Documents/database_schema.sql
+        psql -h localhost -U postgres -d audeasy -f documents/database_schema.sql
       env:
         PGPASSWORD: gaelRafa@91072834
     - name: Insert test user
-      run: python Code/insert_test_user.py
+      run: python code/insert_test_user.py
       env:
         PGPASSWORD: gaelRafa@91072834
     - name: Run tests
-      run: pytest Code/tests.py -v
+      run: pytest code/tests.py -v
       env:
         PGPASSWORD: gaelRafa@91072834
