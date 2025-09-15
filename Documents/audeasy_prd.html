@@ -51,7 +51,8 @@
                 <li>`app.py` implemented with /login (HTTP 200/401) and /audit (HTTP 200/500) endpoints.</li>
                 <li>Tests generated (`Code/test_generate.py`), fixed (`Code/tests.py`), and passed (4/4 via `pytest`).
                 </li>
-                <li>PRDs (`agencykhuba_prd.html`, `audeasy_prd.html`) and `README.md` committed (`a7727bd`).</li>
+                <li>PRDs (`agencykhuba_prd.html`, `audeasy_prd.html`) and `README.md` committed (`a7727bd`, `325cc5d`).
+                </li>
             </ul>
         </section>
 
@@ -60,10 +61,13 @@
             <p class="text-gray-600">Objective: Deploy AudEasy backend to a cloud platform (e.g., Render) and set up
                 CI/CD with GitHub Actions.</p>
             <ul class="list-disc list-inside text-gray-600 mt-2">
-                <li>Create GitHub Actions workflow (`.github/workflows/ci.yml`) for automated testing.</li>
-                <li>Deploy Flask app to Render with PostgreSQL integration.</li>
-                <li>Update `README.md` with deployment steps.</li>
-                <li>Enhance SLM prompts for niche-specific code generation (e.g., paralegal, transcription).</li>
+                <li>Created GitHub Actions CI pipeline (`.github/workflows/ci.yml`) for automated testing.</li>
+                <li>Fixed CI pipeline location from `.github/ci.yml` to `.github/workflows/ci.yml`.</li>
+                <li>Updated PAT with `workflow` scope to enable CI pipeline push (Completed).</li>
+                <li>Deploy Flask app to Render with PostgreSQL integration (Pending).</li>
+                <li>Update `README.md` and PRD with deployment steps (Pending).</li>
+                <li>Enhance SLM prompts for niche-specific code generation (e.g., paralegal, transcription) (Pending).
+                </li>
             </ul>
         </section>
     </div>
