@@ -1,15 +1,12 @@
 name: CI Pipeline
-
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
-
 jobs:
   test:
     runs-on: ubuntu-latest
-
     services:
       postgres:
         image: postgres:16
@@ -23,8 +20,7 @@ jobs:
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
-          --health-retries 15
-
+          --health-retries 20
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python
@@ -37,7 +33,18 @@ jobs:
         pip install -r requirements.txt
     - name: Wait for PostgreSQL
       run: |
-        timeout 60s bash -c 'until pg_isready -h localhost -p 5432 -U postgres; do sleep 1; done'
+        for i in {1..120}; do
+          if pg_isready -h localhost -p 5432 -U postgres; then
+            echo "PostgreSQL is ready!"
+            break
+          fi
+          echo "Waiting for PostgreSQL... ($i/120)"
+          sleep 1
+        done
+        if ! pg_isready -h localhost -p 5432 -U postgres; then
+          echo "PostgreSQL not ready after 120s"
+          exit 1
+        fi
     - name: Apply database schema
       run: |
         psql -h localhost -U postgres -d audeasy -f documents/database_schema.sql
