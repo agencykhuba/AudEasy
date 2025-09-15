@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Led DevOps Workflow Dashboard for AudEasy & SLM Workflow MVP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto p-6 max-w-6xl">
+        <h1 class="text-4xl font-bold text-gray-800 mb-6">AI-Led DevOps Workflow Dashboard for AudEasy & SLM Workflow
+            MVP</h1>
+        <p class="text-xl text-gray-600 mb-4">Current Date: September 14, 2025 • Pilot Niche: AudEasy (Audit App with
+            CAPA/CAR) • Overall Project Progress: 60%</p>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Mentor Note: Phase 3 Complete, Starting Phase 4</h2>
+            <p class="text-gray-600">Phase 3 completed with 100% progress, delivering a reliable AudEasy backend with
+                /login and /audit endpoints, validated by tests (commit a7727bd, 325cc5d). Phase 4 initiates CI/CD and
+                deployment to Render. Phases 4-7 (~32h, 2-3 weeks at 15h/week) will complete the SLM Workflow MVP and
+                AudEasy MVP, scaling to 3-5 niches by Q1 2026. Use Python, VS Code, Git, Git Bash, transformers, torch.
+                Share outputs via GitHub or reply. Take breaks, ask questions!</p>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Phase 1: Initiation & Workflow Setup (~15h, Completed)
+            </h2>
+            <p class="text-gray-600 mb-4">Goal: Set up the SLM workflow foundation and define AudEasy requirements with
+                reusable prompts and templates. Progress: 100%</p>
+            <ul class="space-y-4">
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 1: Setup workspace and initial files: Ran setup_project.py to create AudEasy_Project with
+                    Documents, Code, Notes and files (notes.txt, requirements_form.txt, spec.json, prompts.txt,
+                    workflow_template.py). Description: Automated setup, saving time.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 1: Understand AudEasy and define MVP: Wrote problems, users, pain points, MVP features in
+                    notes.txt. Description: Clarified AudEasy’s scope.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 2: Collect requirements and problem statement: Filled requirements_form.txt; wrote 100-200 word
+                    problem statement in notes.txt. Description: Streamlined planning.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 2: Learn JSON and generate spec.json: Practiced with temp.json, filled spec.json with features,
+                    users, data, statement. Description: Structured plans for SLM.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 3: Setup GitHub and commit: Created agencykhuba/AudEasy, pushed files (commits d36ca6f,
+                    2658325). Description: Enabled version control.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 3: Design and test SLM prompts: Created prompts.txt with 5 AI questions, tested one.
+                    Description: Set up SLM workflow core.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 4: Plan data and validate feasibility: Added data_sources to spec.json, noted complex parts in
+                    notes.txt. Description: Ensured practicality.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 4: Test data and progress stubs: Created Google Sheet with sample audits, linked in spec.json;
+                    added progress to spec.json. Description: Prepped SLM data.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 5: Define workflow scope and data strategy: Listed SLM steps in notes.txt; created
+                    data_strategy.txt. Description: Outlined workflow.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 5: Review and finalize: Reviewed spec.json, prompts.txt, data_strategy.txt, noted changes.
+                    Description: Ensured alignment.
+                </li>
+            </ul>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Phase 2: Workflow Design & Architecture (~12h,
+                Completed)</h2>
+            <p class="text-gray-600 mb-4">Goal: Design SLM workflow blueprint and AudEasy architecture with reusable
+                schemas and UI. Progress: 100%</p>
+            <ul class="space-y-4">
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 1: Schema and SLM prompt: Used draw.io to draw Users (ID, username, password), Audits (ID,
+                    issue, action, company_id); updated prompts.txt: "Generate schema for [niche] app". Description:
+                    Combined schema design with SLM for niche adaptability, building on spec.json.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 1: Security and compliance: Created security_checklist.txt in Documents with 5-7 items (e.g.,
+                    "Encrypt data"); added GDPR note. Description: Merged security planning for efficiency, ensuring
+                    workflow safety.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 2: UI and data strategy: Sketched login, form, list in draw.io; updated data_strategy.txt:
+                    "Sources: Forms; Quality: Check blanks". Description: Aligned app and workflow design, reusing Phase
+                    1 data plan.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 2: Cloud and workflow plan: Created iac_template.txt: "Use Render.com"; updated
+                    workflow_plan.txt in Documents: "SLM for code, tests, deploy". Description: Set up scalable
+                    infrastructure, extending workflow_template.py.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 3: Risk and multi-tenant: Listed risks in security_checklist.txt (e.g., "Weak passwords");
+                    updated schema with company_id. Description: Ensured scalability, security for multi-niche use.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 3: Data flow and SLM prompt: Drew "Niche input → SLM → App output" in draw.io; added to
+                    prompts.txt: "Generate data flow for [niche]". Description: Defined workflow process, enhancing SLM
+                    prompts.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 4: Docs and strategy: Updated README.md with schema, data_strategy.txt; finalized
+                    data_strategy.txt with sections (Sources, Quality). Description: Prepared reusable docs, building on
+                    Phase 1.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 4: Handover and test: Zipped Documents folder; tested schema prompt with mentor. Description:
+                    Validated workflow deliverables, reusing prompts.txt.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 5: Review and compliance: Reviewed files, noted changes in notes.txt; updated
+                    compliance_plan.txt with GDPR log. Description: Ensured alignment for workflow and app.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 5: Commit: Pushed files to agencykhuba/AudEasy (commit 354b412). Description: Secured progress,
+                    leveraging existing GitHub setup.
+                </li>
+            </ul>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Phase 3: Workflow & Code Generation (~15h, Completed)
+            </h2>
+            <p class="text-gray-600 mb-4">Goal: Build SLM workflow for code/test generation, produce AudEasy backend
+                with /login and /audit endpoints. Progress: 100%</p>
+            <ul class="space-y-4">
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 1: Setup PostgreSQL: Installed PostgreSQL 16.10, created `audeasy` database, applied schema
+                    (Documents/database_schema.sql). Description: Established database foundation.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 1: Insert test user: Created generate_hash.py, insert_test_user.py; inserted test user with
+                    valid bcrypt hash. Description: Enabled authentication testing.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 2: Backend implementation: Updated app.py with /login and /audit endpoints, fixed Invalid salt
+                    error. Description: Built core functionality.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 2: Test generation: Created test_generate.py with Phi-2 SLM, fixed tests.py for endpoint
+                    validation. Description: Automated testing with SLM.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 3: Test execution: Ran pytest Code/tests.py -v, all 4 tests passed (login success/failure, audit
+                    success/missing data). Description: Validated functionality.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 3: Commit changes: Pushed app.py, tests.py, validate_hash.py, insert_test_user.py,
+                    requirements.txt (commit a7727bd). Description: Secured progress.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 4: Documentation: Updated README.md, audeasy_prd.html with Phase 3 steps (commit 325cc5d).
+                    Description: Ensured living documentation.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 4: CI pipeline setup: Created .github/workflows/ci.yml for automated testing. Description:
+                    Initiated Phase 4 automation.
+                </li>
+            </ul>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Phase 4: Workflow QA & Testing (~12h, In Progress)
+            </h2>
+            <p class="text-gray-600 mb-4">Goal: Test SLM workflow and AudEasy for reliability. Progress: 10%</p>
+            <ul class="space-y-4">
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 1: CI pipeline setup: Created .github/workflows/ci.yml for automated testing with GitHub
+                    Actions. Description: Automates testing for reliability.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 1: Generate and run tests: Add SLM-generated tests to tests.py for login, audit; run "pytest
+                    tests.py". Description: Automates testing with SLM.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 1: Fix issues: Update app.py, HTML with fixes. Description: Ensures reliability.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 2: UI and data quality: Test login, form, list in browser; check audit data for blanks.
+                    Description: Validates user experience.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 2: Integration and security: Test login-to-audit flow; test weak passwords. Description: Ensures
+                    workflow robustness.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 3: Security scan and commit: Run "bandit -r Code"; push to GitHub. Description: Secures app and
+                    workflow.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 3: CAPA and coverage: Test action logging; run tests for 80%+ pass. Description: Validates
+                    functionality.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 4: Document and review: List bugs in notes.txt; test SLM tests with mentor. Description: Tracks
+                    improvements.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 4: Buffer: Apply fixes, retest. Description: Finalizes testing.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 5: Finalize: Ensure workflow and app stability. Description: Completes testing phase.
+                </li>
+            </ul>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Phase 5: Workflow Deployment & Integration (~10h,
+                Planned)</h2>
+            <p class="text-gray-600 mb-4">Goal: Deploy SLM workflow and AudEasy to Render.com, add monitoring. Progress:
+                0%</p>
+            <ul class="space-y-4">
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 1: Dockerize: Verify Docker (docker.com), create Dockerfile, copy Flask Dockerfile. Description:
+                    Prepares deployment.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 1: Test Docker: Run "docker build -t audeasy .", "docker run -p 5000:5000 audeasy". Description:
+                    Ensures containerized app.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 2: Deploy to Render: Sign up at render.com, link GitHub, push code. Description: Makes app live.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 2: Test live: Check login, form, list on Render URL. Description: Validates deployment.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 3: Monitoring and analytics: Create monitoring.txt: "Check Render logs"; add Matomo JS to
+                    index.html. Description: Tracks performance.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 3: Feedback and test: Create feedback.html, copy code; test integrations. Description: Enhances
+                    workflow.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 4: Finalize: Run full test, note issues. Description: Confirms readiness.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 4: Deploy workflow: Add workflow_generate.py to Render, test with prompts. Description: Makes
+                    SLM workflow live.
+                </li>
+            </ul>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Phase 6: Workflow Documentation (~10h, Planned)</h2>
+            <p class="text-gray-600 mb-4">Goal: Document SLM workflow and AudEasy for reuse. Progress: 0%</p>
+            <ul class="space-y-4">
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 1: Setup MkDocs: Run "pip install mkdocs", create mkdocs.yml, run "mkdocs new .". Description:
+                    Sets up documentation.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 1: Generate docs: Add workflow guide to docs/index.md. Description: Documents SLM process.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 2: Wiki and compliance: Create GitHub Wiki for workflow; update compliance_plan.txt with GDPR
+                    log. Description: Prepares reusable docs.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 2: Handover: Zip Code, Documents; email to yourself. Description: Prepares deliverables.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 3: Wiki content and test: Write "SLM Workflow Guide"; run "mkdocs serve". Description: Validates
+                    docs.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 3: CAPA docs: Update wiki with CAPA process. Description: Enhances documentation.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 4: Review and push: Note changes in notes.txt; commit mkdocs.yml, docs to GitHub. Description:
+                    Secures docs.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 4: Finalize: Add lessons learned to wiki. Description: Completes reusable docs.
+                </li>
+            </ul>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Phase 7: Workflow Optimization & Scaling (~10h,
+                Planned)</h2>
+            <p class="text-gray-600 mb-4">Goal: Enhance SLM workflow, test on AudEasy and next projects. Progress: 0%
+            </p>
+            <ul class="space-y-4">
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 1: Monitoring and SLM retrain: Install Prometheus, Grafana via Docker; fine-tune SLM on audit
+                    data. Description: Enhances workflow performance.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 1: Metrics: Update app.py to log requests. Description: Tracks usage.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 2: Dashboard and feedback: Add request rate chart in Grafana; update feedback.html to save to
+                    SQLite, test SLM. Description: Improves monitoring.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 2: Optimize DB: Add index to Audits table. Description: Enhances scalability.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 3: Test workflow: Apply workflow to project 2 idea. Description: Validates scalability.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 3: Security and A/B test: Run "bandit -r Code"; create two audit_form.html versions, track in
+                    Matomo. Description: Secures and optimizes workflow.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    Day 4: Document and scale: Update wiki with monitoring, scaling; test workflow on project 3 idea.
+                    Description: Prepares for future projects.
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-6 w-6 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Day 4: Finalize: Review feedback, redeploy, commit to GitHub. Description: Completes scalable
+                    workflow.
+                </li>
+            </ul>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Next Steps</h2>
+            <p class="text-gray-600">Continue Phase 4 (12h, 1 week at 12h/week). Verify CI pipeline, deploy to Render,
+                and enhance SLM prompts for niche-specific apps (e.g., paralegal, transcription). Share outputs via
+                GitHub or reply. Aim for AudEasy MVP completion by Q4 2025, scaling to 3-5 niches by Q1 2026.</p>
+        </section>
+    </div>
+</body>
+
+</html>
