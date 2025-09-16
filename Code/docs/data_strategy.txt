@@ -1,8 +1,0 @@
-# Data Strategy for AudEasy
-
-- Objective: Maintain clean and reliable audit data for the MVP.
-- Rules:
-  - Check for duplicates in the 119 checklist items manually every week.
-  - Validate all user inputs (e.g., yes/no responses, remarks) for consistency before submission.
-  - Flag incomplete audits (less than 50% of 119 items) for review.
-- Future Plan: Automate import validation and duplicate detection post-MVP using Google Sheets integration.
