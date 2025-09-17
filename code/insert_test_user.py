@@ -1,50 +1,33 @@
-from flask_bcrypt import Bcrypt
-from sqlalchemy import create_engine, text
-import uuid
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+import os
+from app import Users, bcrypt
+from dotenv import load_dotenv
 
-bcrypt = Bcrypt()
-engine = create_engine('postgresql+psycopg2://postgres:gaelRafa%4091072834@localhost:5432/audeasy')
+load_dotenv()
+db_url = os.environ.get('DATABASE_URL', 'postgresql+psycopg2://postgres:GaelRafa91072834@localhost:5433/audeasy')
+if db_url.startswith('postgres://'):
+    db_url = db_url.replace('postgres://', 'postgresql://', 1)
+engine = create_engine(db_url)
+Session = sessionmaker(bind=engine)
 
-# Generate valid hash
-password_hash = bcrypt.generate_password_hash('pass123').decode('utf-8')
-print(f"Generated hash: {password_hash}")
-
-# Test bcrypt
+session = Session()
 try:
-    is_valid = bcrypt.check_password_hash(password_hash, 'pass123')
-    print(f"Bcrypt validation test: {'Successful' if is_valid else 'Failed'}")
-except Exception as e:
-    print(f"Bcrypt validation error: {str(e)}")
-
-# Insert test user
-with engine.connect() as conn:
-    conn.execute(
-        text("DELETE FROM users WHERE email = 'test@audeasy.com';")
-    )
-    conn.execute(
-        text("""
-        INSERT INTO users (id, email, password_hash, name, role, status)
-        VALUES (:id, :email, :password_hash, :name, :role, :status);
-        """),
-        {
-            'id': str(uuid.uuid4()),
-            'email': 'test@audeasy.com',
-            'password_hash': password_hash,
-            'name': 'Test User',
-            'role': 'auditor',
-            'status': 'active'
-        }
-    )
-    conn.commit()
-    print("Test user inserted")
-
-    # Validate hash
-    result = conn.execute(
-        text("SELECT password_hash FROM users WHERE email = 'test@audeasy.com';")
-    ).fetchone()
-    stored_hash = result[0]
-    print(f"Stored hash: {stored_hash}")
-    if stored_hash == password_hash:
-        print("Hash validation successful")
+    existing_user = session.query(Users).filter_by(email='test@example.com').first()
+    if existing_user:
+        print("User test@example.com already exists")
     else:
-        print("Hash validation failed")
+        user = Users(
+            email='test@example.com',
+            password_hash=bcrypt.generate_password_hash('test123').decode('utf-8'),
+            name='Test User',
+            role='auditor',
+            status='active'
+        )
+        session.add(user)
+        session.commit()
+        print("Test user inserted")
+except Exception as e:
+    print(f"Error: {e}")
+finally:
+    session.close()

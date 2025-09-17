@@ -6,16 +6,25 @@ from sqlalchemy.dialects.postgresql import UUID, ENUM
 import uuid
 from datetime import datetime
 import logging
+import os
+from dotenv import load_dotenv
 
-# Set up logging
+load_dotenv()
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
-engine = create_engine('postgresql+psycopg2://postgres:gaelRafa%4091072834@localhost:5432/audeasy')
-Session = sessionmaker(bind=engine)
-Base = declarative_base()
+db_url = os.environ.get('DATABASE_URL', 'postgresql+psycopg2://postgres:GaelRafa91072834@localhost:5433/audeasy')
+if db_url.startswith('postgres://'):
+    db_url = db_url.replace('postgres://', 'postgresql://', 1)
+try:
+    engine = create_engine(db_url)
+    Session = sessionmaker(bind=engine)
+    Base = declarative_base()
+except Exception as e:
+    logger.error(f"Database connection failed: {str(e)}")
+    raise
 
 class Users(Base):
     __tablename__ = 'users'
@@ -38,7 +47,7 @@ class AuditVisits(Base):
 @app.route('/login', methods=['POST'])
 def login():
     try:
-        data = request.json
+        data = request.get_json()
         logger.debug(f"Received login request: {data}")
         session = Session()
         user = session.query(Users).filter_by(email=data['email']).first()
@@ -57,13 +66,13 @@ def login():
 @app.route('/audit', methods=['POST'])
 def submit_audit():
     try:
-        data = request.json
+        data = request.get_json()
         logger.debug(f"Received audit request: {data}")
         session = Session()
         visit = AuditVisits(
-            store_id=data['store_id'],
-            auditor_id=data['auditor_id'],
-            template_id=data['template_id'],
+            store_id=uuid.UUID(data['store_id']),
+            auditor_id=uuid.UUID(data['auditor_id']),
+            template_id=uuid.UUID(data['template_id']),
             visit_datetime=datetime.fromisoformat(data['visit_datetime']),
             status='in_progress'
         )
