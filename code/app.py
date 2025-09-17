@@ -1,51 +1,56 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify
 import os
 import logging
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.exc import OperationalError
+import platform
 
-# Configure logging for monitoring (per recommendations)
+# Configure logging (per implementation_roadmap.md Phase 4)
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
-        logging.FileHandler("logs/app.log"),  # Persistent logs
-        logging.StreamHandler()  # Console output
+        logging.FileHandler("logs/app.log"),
+        logging.StreamHandler()
     ]
 )
 
 app = Flask(__name__)
 
-# Sample route for root (aligned with UIDesignInstructions: simple JSON or template)
 @app.route("/")
 def index():
     logging.info("Root route accessed")
-    # JSON for API simplicity; can switch to render_template("index.html") for UI
     return jsonify({"status": "AudEasy MVP running - Audit & CAPA Workflow"}), 200
 
-# Health check with DB connectivity (supports database_schema.sql)
 @app.route("/health")
 def health():
     logging.info("Health check initiated")
     try:
-        engine = create_engine(os.environ.get("DATABASE_URL"))
+        engine = create_engine(os.environ.get("DATABASE_URL", "sqlite:///test.db"))
         with engine.connect() as conn:
-            conn.execute("SELECT 1")
+            conn.execute(text("SELECT 1"))  # Fix: Use text() for SQLAlchemy 2.0+
         return jsonify({"ok": True, "db": "connected"}), 200
     except OperationalError as e:
         logging.error(f"DB connection failed: {str(e)}")
         return jsonify({"ok": False, "db": "failed", "error": str(e)}), 503
 
-# Placeholder audit route (extend with checklist logic from AM'SExcellenceChecklist-Rev.xlsx)
 @app.route("/audit", methods=["GET"])
 def audit():
     logging.info("Audit route accessed")
-    # Mock response; replace with DB query for checklist_items
     return jsonify({
-        "categories": ["Customer Delight & Ops", "Admin & Financial", "People Development"],
-        "total_items": 119  # From ComprehensiveAnalysis
+        "categories": [
+            "Customer Delight & Ops Excellence",
+            "Admin, Financial Control & Maintenance",
+            "People Development & QA Compliance"
+        ],
+        "total_items": 119
     }), 200
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))  # Render compatibility
-    app.run(debug=False, host="0.0.0.0", port=port)
+    port = int(os.environ.get("PORT", 5000))
+    if platform.system() == "Windows":
+        from waitress import serve
+        logging.info(f"Starting Waitress on port {port}")
+        serve(app, host="0.0.0.0", port=port)
+    else:
+        app.run(debug=False, host="0.0.0.0", port=port)
