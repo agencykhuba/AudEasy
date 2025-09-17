@@ -1,90 +1,51 @@
-from flask import Flask, request, jsonify
-from flask_bcrypt import Bcrypt
-from sqlalchemy import create_engine, Column, String, DateTime
-from sqlalchemy.orm import sessionmaker, declarative_base
-from sqlalchemy.dialects.postgresql import UUID, ENUM
-import uuid
-from datetime import datetime
-import logging
+from flask import Flask, jsonify, render_template
 import os
-from dotenv import load_dotenv
+import logging
+from sqlalchemy import create_engine
+from sqlalchemy.exc import OperationalError
 
-load_dotenv()
-logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
+# Configure logging for monitoring (per recommendations)
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.FileHandler("logs/app.log"),  # Persistent logs
+        logging.StreamHandler()  # Console output
+    ]
+)
 
 app = Flask(__name__)
-bcrypt = Bcrypt(app)
-db_url = os.environ.get('DATABASE_URL', 'postgresql+psycopg2://postgres:GaelRafa91072834@localhost:5433/audeasy')
-if db_url.startswith('postgres://'):
-    db_url = db_url.replace('postgres://', 'postgresql://', 1)
-try:
-    engine = create_engine(db_url)
-    Session = sessionmaker(bind=engine)
-    Base = declarative_base()
-except Exception as e:
-    logger.error(f"Database connection failed: {str(e)}")
-    raise
 
-class Users(Base):
-    __tablename__ = 'users'
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    email = Column(String, unique=True, nullable=False)
-    password_hash = Column(String, nullable=False)
-    name = Column(String)
-    role = Column(ENUM('admin', 'area_manager', 'auditor', name='user_role'), nullable=False)
-    status = Column(ENUM('active', 'inactive', name='user_status'), nullable=False)
+# Sample route for root (aligned with UIDesignInstructions: simple JSON or template)
+@app.route("/")
+def index():
+    logging.info("Root route accessed")
+    # JSON for API simplicity; can switch to render_template("index.html") for UI
+    return jsonify({"status": "AudEasy MVP running - Audit & CAPA Workflow"}), 200
 
-class AuditVisits(Base):
-    __tablename__ = 'audit_visits'
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    store_id = Column(UUID(as_uuid=True), nullable=False)
-    auditor_id = Column(UUID(as_uuid=True), nullable=False)
-    template_id = Column(UUID(as_uuid=True), nullable=False)
-    visit_datetime = Column(DateTime, nullable=False)
-    status = Column(ENUM('in_progress', 'completed', name='visit_status'), nullable=False, default='in_progress')
-
-@app.route('/login', methods=['POST'])
-def login():
+# Health check with DB connectivity (supports database_schema.sql)
+@app.route("/health")
+def health():
+    logging.info("Health check initiated")
     try:
-        data = request.get_json()
-        logger.debug(f"Received login request: {data}")
-        session = Session()
-        user = session.query(Users).filter_by(email=data['email']).first()
-        logger.debug(f"Queried user: {user.email if user else None}")
-        if user and bcrypt.check_password_hash(user.password_hash, data['password']):
-            logger.debug("Password check passed")
-            return jsonify({'status': 'success', 'user_id': str(user.id), 'role': user.role}), 200
-        logger.debug("Invalid credentials")
-        return jsonify({'status': 'error', 'message': 'Invalid credentials'}), 401
-    except Exception as e:
-        logger.error(f"Login error: {str(e)}")
-        return jsonify({'status': 'error', 'message': str(e)}), 500
-    finally:
-        session.close()
+        engine = create_engine(os.environ.get("DATABASE_URL"))
+        with engine.connect() as conn:
+            conn.execute("SELECT 1")
+        return jsonify({"ok": True, "db": "connected"}), 200
+    except OperationalError as e:
+        logging.error(f"DB connection failed: {str(e)}")
+        return jsonify({"ok": False, "db": "failed", "error": str(e)}), 503
 
-@app.route('/audit', methods=['POST'])
-def submit_audit():
-    try:
-        data = request.get_json()
-        logger.debug(f"Received audit request: {data}")
-        session = Session()
-        visit = AuditVisits(
-            store_id=uuid.UUID(data['store_id']),
-            auditor_id=uuid.UUID(data['auditor_id']),
-            template_id=uuid.UUID(data['template_id']),
-            visit_datetime=datetime.fromisoformat(data['visit_datetime']),
-            status='in_progress'
-        )
-        session.add(visit)
-        session.commit()
-        logger.debug(f"Audit visit created: {visit.id}")
-        return jsonify({'status': 'success', 'visit_id': str(visit.id)}), 200
-    except Exception as e:
-        logger.error(f"Audit error: {str(e)}")
-        return jsonify({'status': 'error', 'message': str(e)}), 500
-    finally:
-        session.close()
+# Placeholder audit route (extend with checklist logic from AM'SExcellenceChecklist-Rev.xlsx)
+@app.route("/audit", methods=["GET"])
+def audit():
+    logging.info("Audit route accessed")
+    # Mock response; replace with DB query for checklist_items
+    return jsonify({
+        "categories": ["Customer Delight & Ops", "Admin & Financial", "People Development"],
+        "total_items": 119  # From ComprehensiveAnalysis
+    }), 200
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))  # Render compatibility
+    app.run(debug=False, host="0.0.0.0", port=port)
