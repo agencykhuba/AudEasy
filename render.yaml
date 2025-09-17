@@ -2,16 +2,11 @@ services:
   - type: web
     name: audeasy
     env: python
-    repo: https://github.com/agencykhuba/AudEasy
     plan: free
-    branch: main
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install -r requirements-cpu.txt
     startCommand: gunicorn --bind 0.0.0.0:$PORT code.app:app
     envVars:
       - key: DATABASE_URL
-        fromDatabase:
-          name: audeasy-db
-          property: connectionString
-databases:
-  - name: audeasy-db
-    plan: free
+        value: postgresql://audeasy_db_user:GaelRafa91072834@dpg-d352di8dl3ps738adjkg-a.oregon-postgres.render.com/audeasy_db
+      - key: FLASK_ENV
+        value: production
