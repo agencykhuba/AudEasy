@@ -1,5 +1,6 @@
 import pytest
 from app.app import app
+from sqlalchemy.exc import OperationalError
 
 @pytest.fixture
 def client():
@@ -18,7 +19,7 @@ def test_health(client):
 
 def test_health_db_failure(client, monkeypatch):
     def mock_connect(*args, **kwargs):
-        raise Exception("DB connection failed")
+        raise OperationalError("mock", "mock", "DB connection failed")
     monkeypatch.setattr("sqlalchemy.create_engine", lambda *args, **kwargs: type('MockEngine', (), {'connect': mock_connect})())
     response = client.get("/health")
     assert response.status_code == 503
