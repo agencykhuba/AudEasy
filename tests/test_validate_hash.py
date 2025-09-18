@@ -7,3 +7,7 @@ def test_validate_hash():
     hash_value = generate_bcrypt.generate_password_hash(password).decode("utf-8")
     assert bcrypt.check_password_hash(hash_value, password) is True
     assert bcrypt.check_password_hash(hash_value, "wrong_password") is False
+
+def test_validate_hash_invalid():
+    with pytest.raises(ValueError):
+        bcrypt.check_password_hash("invalid_hash", "test_password")
