@@ -11,23 +11,25 @@ if db_url.startswith('postgres://'):
 engine = create_engine(db_url)
 Session = sessionmaker(bind=engine)
 
-session = Session()
-try:
-    existing_user = session.query(Users).filter_by(email='test@example.com').first()
-    if existing_user:
-        print("User test@example.com already exists")
-    else:
+def insert_test_user(session, email, password_hash):
+    try:
+        existing_user = session.query(Users).filter_by(email=email).first()
+        if existing_user:
+            print(f"User {email} already exists")
+            return
         user = Users(
-            email='test@example.com',
-            password_hash=bcrypt.generate_password_hash('test123').decode('utf-8'),
-            name='Test User',
-            role='auditor',
-            status='active'
+            id="1",  # Simplified; use uuid_generate_v4() in production
+            email=email,
+            password_hash=password_hash,
+            name="Test User",
+            role="auditor",
+            status="active"
         )
         session.add(user)
         session.commit()
         print("Test user inserted")
-except Exception as e:
-    print(f"Error: {e}")
-finally:
-    session.close()
+    except Exception as e:
+        session.rollback()
+        print(f"Error: {e}")
+    finally:
+        session.close()
