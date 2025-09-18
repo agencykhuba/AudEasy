@@ -9,3 +9,17 @@ def test_insert_test_user(db_session):
     assert user is not None
     assert user.email == "test@example.com"
     assert bcrypt.check_password_hash(user.password_hash, "test123")
+
+def test_insert_duplicate_user(db_session, capsys):
+    password_hash = bcrypt.generate_password_hash("dup123").decode("utf-8")
+    insert_test_user(db_session, "dup@example.com", password_hash)
+    insert_test_user(db_session, "dup@example.com", password_hash)
+    captured = capsys.readouterr()
+    assert "already exists" in captured.out
+
+def test_insert_user_exception(db_session, capsys):
+    insert_test_user(db_session, "fail@example.com", None)  # Violates NOT NULL
+    captured = capsys.readouterr()
+    assert "Error:" in captured.out
+    user = db_session.query(Users).filter_by(email="fail@example.com").first()
+    assert user is None
