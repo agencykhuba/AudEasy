@@ -25,43 +25,27 @@ def index():
 def health():
     logging.info("Health check initiated")
     try:
+        # Database connection check
+        DATABASE_URL = os.environ.get("DATABASE_URL")
+        if not DATABASE_URL:
+            DATABASE_URL = "sqlite:///fallback.db"
+            logging.warning("DATABASE_URL not set - using SQLite fallback")
         
-# Production database configuration
-DATABASE_URL = os.environ.get("DATABASE_URL", 
-    "postgresql://audeasy_db_user:gPGHjHhaUKw3cuTVEc9KLHTYuI7UW8P8@dpg-d352di8dl3ps738adjkg-a.oregon-postgres.render.com/audeasy_db")
-
-try:
-    engine = create_engine(DATABASE_URL)
-    # Test connection on startup
-    with engine.connect() as conn:
-        conn.execute(text("SELECT 1"))
-    logging.info("Database connection successful")
-except Exception as e:
-    logging.error(f"Database connection failed: {e}")
-    # Fallback for development
-    engine = create_engine("sqlite:///fallback.db")
-    logging.warning("Using SQLite fallback")
+        engine = create_engine(DATABASE_URL)
         with engine.connect() as conn:
-            conn.execute(text("SELECT 1"))  # Fix: Use text() for SQLAlchemy 2.0+
-        return jsonify({"ok": True, "db": "connected"}), 200
-    except OperationalError as e:
-        logging.error(f"DB connection failed: {str(e)}")
-        return jsonify({"ok": False, "db": "failed", "error": str(e)}), 503
-
-@app.route("/audit", methods=["GET"])
-def audit():
-    logging.info("Audit route accessed")
-    return jsonify({
-        "categories": [
-            "Customer Delight & Ops Excellence",
-            "Admin, Financial Control & Maintenance",
-            "People Development & QA Compliance"
-        ],
-        "total_items": 119
-    }), 200
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
+            conn.execute(text("SELECT 1"))
+        
+        return jsonify({
+            "status": "healthy",
+            "timestamp": datetime.now().isoformat(),
+            "database": "connected"
+        })
+    except Exception as e:
+        logging.error(f"Health check failed: {e}")
+        return jsonify({
+            "status": "unhealthy",
+            "error": str(e)
+        }), 500
     if platform.system() == "Windows":
         from waitress import serve
         logging.info(f"Starting Waitress on port {port}")
