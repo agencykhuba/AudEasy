@@ -22,28 +22,26 @@ def run_command(command, description):
 def deploy_ccc():
     """Deploy Central Command Center"""
     
-    # Step 1: Apply database extensions
     print("=== Deploying Central Command Center ===")
     
-    # Step 2: Install CCC requirements
+    # Step 1: Install CCC requirements
     run_command("pip install -r ccc_requirements.txt", "Installing CCC dependencies")
     
-    # Step 3: Test CCC backend locally
-    print("Testing CCC backend...")
-    
-    # Step 4: Create unified requirements for deployment
+    # Step 2: Create unified requirements for deployment
     run_command("cat requirements.txt ccc_requirements.txt | sort | uniq > unified_requirements.txt", 
                 "Creating unified requirements")
     
-    # Step 5: Git commit and deploy
+    # Step 3: Git operations with proper escaping
     commands = [
         ("git add .", "Stage CCC files"),
-        ("git commit -m 'Deploy: Central Command Center backend with multi-vertical support'", "Commit CCC changes"),
+        ('git commit -m "Deploy: Central Command Center backend with multi-vertical support"', "Commit CCC changes"),
         ("git push origin main", "Deploy to production")
     ]
     
     for command, description in commands:
-        run_command(command, description)
+        result = run_command(command, description)
+        if result is None and "commit" in command:
+            print("Warning: Commit may have failed due to no changes or existing commit")
     
     print("\nCentral Command Center deployment initiated!")
     print("Monitor at: https://audeasy.onrender.com/api/health")
