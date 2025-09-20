@@ -53,3 +53,32 @@ if __name__ == "__main__":
         serve(app, host="0.0.0.0", port=port)
     else:
         app.run(debug=False, host="0.0.0.0", port=port)
+# CCC Monitoring Integration
+try:
+    import sys
+    import os
+    sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'ccc_backend'))
+    
+    from api.monitoring import monitoring_bp
+    app.register_blueprint(monitoring_bp)
+    
+    # Add CCC health endpoint to existing app
+    @app.route('/api/ccc/health', methods=['GET'])
+    def ccc_health():
+        return jsonify({
+            'status': 'healthy',
+            'service': 'Central Command Center',
+            'timestamp': datetime.now().isoformat(),
+            'version': '1.0.0',
+            'integration': 'AudEasy-CCC',
+            'monitoring_endpoints': {
+                'dashboard': '/api/monitoring/dashboard',
+                'health_check': '/api/monitoring/health-check',
+                'trigger_deploy': '/api/monitoring/trigger-deploy'
+            }
+        })
+    
+    logging.info("CCC monitoring integrated successfully into AudEasy")
+    
+except Exception as e:
+    logging.error(f"Failed to integrate CCC monitoring: {e}")

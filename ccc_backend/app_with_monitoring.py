@@ -18,6 +18,14 @@ app = Flask(__name__)
 CORS(app)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'ccc-dev-key-2024')
 
+# Import and register monitoring blueprint
+try:
+    from api.monitoring import monitoring_bp
+    app.register_blueprint(monitoring_bp)
+    logging.info("Monitoring blueprint registered successfully")
+except Exception as e:
+    logging.error(f"Failed to register monitoring blueprint: {e}")
+
 # Database connection
 def get_db_connection():
     try:
@@ -50,12 +58,18 @@ def token_required(f):
 
 @app.route('/api/health', methods=['GET'])
 def health_check():
-    """CCC Health Check"""
+    """CCC Health Check with Monitoring Integration"""
     return jsonify({
         'status': 'healthy',
         'service': 'Central Command Center',
         'timestamp': datetime.now(timezone.utc).isoformat(),
-        'version': '1.0.0'
+        'version': '1.0.0',
+        'monitoring': 'integrated',
+        'endpoints': {
+            'monitoring_dashboard': '/api/monitoring/dashboard',
+            'health_check': '/api/monitoring/health-check',
+            'trigger_deploy': '/api/monitoring/trigger-deploy'
+        }
     })
 
 @app.route('/api/auth/login', methods=['POST'])
@@ -96,7 +110,7 @@ def login():
         conn.close()
 
 @app.route('/api/verticals', methods=['GET'])
-@token_required
+@token_required  
 def get_verticals(current_user_id):
     """Get all verticals with their status"""
     conn = get_db_connection()
@@ -134,69 +148,6 @@ def get_verticals(current_user_id):
     except Exception as e:
         logging.error(f"Get verticals error: {e}")
         return jsonify({'error': 'Failed to fetch verticals'}), 500
-    finally:
-        conn.close()
-
-@app.route('/api/dashboard/overview', methods=['GET'])
-@token_required
-def dashboard_overview(current_user_id):
-    """Central dashboard overview data"""
-    conn = get_db_connection()
-    if not conn:
-        return jsonify({'error': 'Database connection failed'}), 500
-    
-    try:
-        cur = conn.cursor()
-        
-        # Active projects count
-        cur.execute("SELECT COUNT(*) FROM projects WHERE status = 'active'")
-        active_projects = cur.fetchone()[0]
-        
-        # Total revenue this month
-        cur.execute("""
-            SELECT COALESCE(SUM(amount), 0) 
-            FROM revenue_records 
-            WHERE status = 'completed' 
-            AND DATE_TRUNC('month', created_at) = DATE_TRUNC('month', CURRENT_DATE)
-        """)
-        monthly_revenue = float(cur.fetchone()[0])
-        
-        # Vertical status distribution
-        cur.execute("""
-            SELECT status, COUNT(*) 
-            FROM verticals 
-            GROUP BY status
-        """)
-        vertical_status = dict(cur.fetchall())
-        
-        # Recent projects
-        cur.execute("""
-            SELECT p.name, v.display_name, p.status, p.created_at
-            FROM projects p
-            JOIN verticals v ON p.vertical_id = v.id
-            ORDER BY p.created_at DESC
-            LIMIT 5
-        """)
-        recent_projects = []
-        for row in cur.fetchall():
-            recent_projects.append({
-                'name': row[0],
-                'vertical': row[1],
-                'status': row[2],
-                'created_at': row[3].isoformat()
-            })
-        
-        return jsonify({
-            'active_projects': active_projects,
-            'monthly_revenue': monthly_revenue,
-            'vertical_status': vertical_status,
-            'recent_projects': recent_projects,
-            'timestamp': datetime.now(timezone.utc).isoformat()
-        })
-        
-    except Exception as e:
-        logging.error(f"Dashboard overview error: {e}")
-        return jsonify({'error': 'Failed to fetch dashboard data'}), 500
     finally:
         conn.close()
 
