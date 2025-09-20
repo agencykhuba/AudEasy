@@ -4,6 +4,7 @@ import logging
 from sqlalchemy import create_engine, text, text
 from sqlalchemy.exc import OperationalError
 import platform
+from datetime import datetime
 
 # Configure logging (per implementation_roadmap.md Phase 4)
 logging.basicConfig(
