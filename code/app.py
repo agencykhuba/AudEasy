@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 import os
 import logging
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine, text, text
 from sqlalchemy.exc import OperationalError
 import platform
 
@@ -25,7 +25,22 @@ def index():
 def health():
     logging.info("Health check initiated")
     try:
-        engine = create_engine(os.environ.get("DATABASE_URL", "sqlite:///test.db"))
+        
+# Production database configuration
+DATABASE_URL = os.environ.get("DATABASE_URL", 
+    "postgresql://audeasy_db_user:gPGHjHhaUKw3cuTVEc9KLHTYuI7UW8P8@dpg-d352di8dl3ps738adjkg-a.oregon-postgres.render.com/audeasy_db")
+
+try:
+    engine = create_engine(DATABASE_URL)
+    # Test connection on startup
+    with engine.connect() as conn:
+        conn.execute(text("SELECT 1"))
+    logging.info("Database connection successful")
+except Exception as e:
+    logging.error(f"Database connection failed: {e}")
+    # Fallback for development
+    engine = create_engine("sqlite:///fallback.db")
+    logging.warning("Using SQLite fallback")
         with engine.connect() as conn:
             conn.execute(text("SELECT 1"))  # Fix: Use text() for SQLAlchemy 2.0+
         return jsonify({"ok": True, "db": "connected"}), 200

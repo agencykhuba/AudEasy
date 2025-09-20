@@ -55,3 +55,46 @@
 - Maintenance logs tracked in version control
 - Zero-tolerance for orphaned files in production
 
+
+AudEasy_Project/
+├── code/                    # Core AudEasy application
+├── ccc_backend/            # Central Command Center
+├── database_extensions/    # Database schema files
+├── requirements.txt        # Core dependencies
+├── deploy_*.py            # Deployment scripts
+├── archive/               # Archived legacy files
+└── .maintenance_log.md    # Maintenance history
+
+**Naming Conventions**:
+- Use descriptive, purposeful names
+- Avoid version numbers in filenames (use git instead)
+- No spaces in filenames (use underscores)
+- Clear separation between production and development files
+
+### Quality Gates for File Management
+- No duplicate content in separate files
+- All Python files must have clear purpose and imports
+- Configuration files must be actively used
+- Log files automatically rotated/archived
+- Regular cleanup prevents technical debt accumulation
+
+### Automated Maintenance Integration
+- Integrate cleanup script into CCC dashboard
+- Weekly automated scans with reporting
+- Maintenance logs tracked in version control
+- Zero-tolerance for orphaned files in production
+
+### Implementation Requirements
+**Pre-Deployment Checklist**:
+1. Run directory audit script
+2. Verify no orphaned files present
+3. Confirm single authoritative requirements.txt
+4. Validate proper Python module structure
+5. Check maintenance log for recent cleanup
+
+**Post-Deployment Validation**:
+1. Verify clean deployment without warnings
+2. Confirm all services accessible
+3. Validate monitoring endpoints operational
+4. Document any issues in maintenance log
+
