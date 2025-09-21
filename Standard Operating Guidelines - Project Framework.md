@@ -114,3 +114,65 @@
 ## Conclusion
 
 **Core Commitment**: Quality Over Speed Always (QOSA) - the unwavering principle that guides all project activities toward long-term success and effectiveness.
+
+## ELF Framework (Evidence-Led Fixing)
+
+### Core Principle
+Never debug by assumption. Always follow evidence to the root cause.
+
+### The ELF Process
+
+#### E - Evidence Collection (15 minutes maximum)
+1. **Read Actual Logs**: Check Render/server logs for exact error messages
+2. **Verify Service State**: Confirm what's actually running vs crashed
+3. **Document Symptoms**: Record what works vs what fails
+4. **Check Recent Changes**: Review git log and environment modifications
+
+#### L - Local Reproduction (10 minutes maximum)
+1. **Run Locally**: Test the failing component on development machine
+2. **Compare Behavior**: Local failure = code issue, Remote-only failure = environment issue
+3. **Isolate Variables**: Test one component at a time
+4. **Log Everything**: Add logging to track execution flow
+
+#### F - Fix Systematically (varies)
+1. **Apply 5 Whys**: Use existing root cause analysis from SOG
+2. **Minimal Change**: Fix ONE thing based on evidence
+3. **Test Before Deploy**: Verify fix locally first
+4. **Deploy and Verify**: Confirm fix resolves the issue
+5. **Document Solution**: Record what worked for future reference
+
+### ELF Anti-Patterns (What NOT to Do)
+- Changing multiple things without testing each
+- Assuming root cause without reading logs
+- Deploying untested fixes
+- Skipping local reproduction step
+- Ignoring evidence that contradicts assumptions
+
+### ELF Success Criteria
+- Issue resolved in under 30 minutes for simple bugs
+- Clear understanding of root cause before fixing
+- No collateral damage from fixes
+- Documented solution for knowledge base
+
+### Integration with Existing SOG Frameworks
+- **After PDC**: Use ELF when damage is identified
+- **Before BSA**: ELF provides evidence for solution analysis
+- **With FF**: ELF guides which backups to examine
+
+### Example: Health Endpoint Debug Session
+
+**Wrong Approach (What We Did):**
+1. Assumed credential rotation without evidence
+2. Changed database URLs multiple times
+3. Did not read actual health endpoint code
+4. Spent 2+ hours troubleshooting
+
+**ELF Approach (What We Should Have Done):**
+1. E: Read logs, see 500 error on /health
+2. E: Check code, grep health endpoint
+3. E: Found missing return statement in 2 minutes
+4. L: Would have caught this in local testing
+5. F: Add return statement, deploy, verify
+**Total time: 20 minutes**
+
+### ELF Quick Reference Card
