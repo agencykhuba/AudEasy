@@ -57,6 +57,11 @@ def health():
         logging.error(f"Health check failed: {e}")
         return jsonify({
             "status": "unhealthy",
+            "error": str(e),
+            "timestamp": datetime.now().isoformat()
+        }), 503
+        return jsonify({
+            "status": "unhealthy",
             "error": str(e)
         }), 500
     if platform.system() == "Windows":
