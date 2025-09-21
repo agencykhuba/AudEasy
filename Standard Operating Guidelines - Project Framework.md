@@ -98,3 +98,114 @@ AudEasy_Project/
 3. Validate monitoring endpoints operational
 4. Document any issues in maintenance log
 
+
+## Windows Environment Standards
+
+### Environment Constants
+**Development Environment**: Windows + VS Code + Git Bash
+**Encoding Requirements**: UTF-8 with BOM handling
+**Terminal Compatibility**: Git Bash heredoc limitations
+
+### Code Block Standards for Windows Environment
+**Mandatory Requirements**:
+- No emojis or Unicode characters in heredoc blocks
+- Use ASCII characters only in code templates
+- Validate syntax immediately after file creation
+- Test all heredoc operations in Git Bash environment
+
+### Git Bash Heredoc Protocol
+```bash
+# Standard format for all code blocks
+cat > filename.py << 'EOF'
+#!/usr/bin/env python3
+# Use simple ASCII comments only
+# No emojis, no special Unicode characters
+
+## Process And Damage Control (PDC) Framework
+
+### PDC Methodology
+**Requirement**: For all critical fixes or changes, conduct PDC assessment before and after modifications.
+
+### PDC Assessment Components
+1. **Git History Analysis**: Review recent commits for potential damage patterns
+2. **File Integrity Check**: Validate syntax and structure of critical files
+3. **Last Working State Identification**: Locate safe rollback points
+4. **Recovery Options Generation**: Provide multiple paths forward with risk assessment
+
+### PDC Implementation Triggers
+- Syntax errors in production
+- Failed deployments
+- Multiple rapid commits without validation
+- Emergency fixes that may have introduced new problems
+- Any situation where fixes might have damaged working code
+
+### PDC Recovery Decision Matrix
+**File-Level Recovery**:
+- Single file damaged: Surgical fix or file rollback
+- Multiple files damaged: Commit rollback consideration
+- Critical path broken: Immediate rollback to stable state
+
+**Risk Assessment Criteria**:
+- LOW: Isolated syntax fixes with clear scope
+- MEDIUM: Configuration changes affecting multiple systems  
+- HIGH: Structural changes or multiple interrelated fixes
+
+### Integration with BSA
+PDC must be integrated with BSA analysis:
+1. BSA identifies optimal route forward
+2. PDC assesses current damage and recovery options
+3. Combined analysis determines safest path to resolution
+4. Implementation includes damage prevention measures
+
+## Fallback Framework (FF) Protocol
+
+### FF Mandatory Requirements
+**Before ANY file modification, deletion, or update**: Execute FF evaluation and backup procedure.
+
+### FF File Importance Classification
+**CRITICAL**: Core application files essential for operation
+- code/app.py, requirements.txt, database schemas
+- Requires backup before ANY modification
+
+**IMPORTANT**: Configuration and infrastructure files  
+- .py files, .sql files, .yml/.yaml, Dockerfile
+- Requires backup before significant changes
+
+**SUPPORTING**: Documentation and utility files
+- .md, .txt, .html files
+- Backup recommended for major revisions
+
+### FF Backup Structure
+fallback_backups/
+├── critical/           # Core application files
+├── important/         # Configuration files
+├── supporting/        # Documentation files
+├── experimental/      # Development files
+└── metadata/          # Backup registry and logs
+
+### FF Integration with PDC and BSA
+- **PDC**: Use FF backups to identify damaged files and restore points
+- **BSA**: Factor FF backup availability into route decision analysis
+- **Combined Protocol**: FF → PDC → BSA → Implementation → Validation
+
+### Windows Environment Standards (Completed)
+
+#### Environment Constants
+**Development Environment**: Windows + VS Code + Git Bash
+**Encoding Requirements**: UTF-8 with BOM handling
+**Terminal Compatibility**: Git Bash heredoc limitations
+
+#### Code Block Standards for Windows Environment
+**Mandatory Requirements**:
+- No emojis or Unicode characters in heredoc blocks
+- Use ASCII characters only in code templates
+- Validate syntax immediately after file creation
+- Test all heredoc operations in Git Bash environment
+
+#### Git Bash Heredoc Protocol
+```bash
+# Standard format for all code blocks
+cat > filename.py << 'EOF'
+#!/usr/bin/env python3
+# Use simple ASCII comments only
+# No emojis, no special Unicode characters
