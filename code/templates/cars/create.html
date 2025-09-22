@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block title %}Create New CAR{% endblock %}
+{% block content %}
+<div class="container mx-auto px-4 py-8 max-w-6xl">
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold mb-2">Create Corrective Action Request</h1>
+        <p class="text-gray-300">Describe the issue in your own words - our AI will help structure it</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2">
+            <form id="carCreateForm" class="bg-gray-800 rounded-lg p-6 shadow-xl" method="POST" action="/cars/create">
+                <div class="mb-6">
+                    <label class="block text-sm font-medium mb-2">
+                        What happened? <span class="text-blue-400">(Natural language)</span>
+                        <button type="button" onclick="showHelp('description')" class="ml-2 text-gray-400 hover:text-white">
+                            <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </button>
+                    </label>
+                    <textarea id="carDescription" name="description" rows="6" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-400 resize-none" placeholder="Example: During morning prep, noticed condensation inside the walk-in cooler. Temperature reading was 8Â°C when it should be 4Â°C..." required></textarea>
+                </div>
+
+                <div id="aiAnalysis" class="hidden mb-6 p-4 bg-blue-900/20 border border-blue-400 rounded-lg">
+                    <h3 class="font-semibold mb-3 text-blue-400">AI Analysis</h3>
+                    <div class="grid grid-cols-2 gap-3 text-sm">
+                        <div><span class="text-gray-400">Category:</span> <span id="detectedCategory" class="ml-2 font-medium"></span></div>
+                        <div><span class="text-gray-400">Severity:</span> <span id="detectedSeverity" class="ml-2 font-medium"></span></div>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-sm font-medium mb-2">Evidence Photos</label>
+                    <div class="border-2 border-dashed border-gray-600 rounded-lg p-4 text-center">
+                        <input type="file" id="photoInput" name="photos" accept="image/*" multiple class="hidden" capture="environment">
+                        <button type="button" onclick="document.getElementById('photoInput').click()" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition">í³· Add Photos</button>
+                        <div id="photoPreview" class="mt-4 flex flex-wrap gap-2"></div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end gap-3">
+                    <a href="/dashboard" class="px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white font-medium rounded-lg transition">Cancel</a>
+                    <button type="submit" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition">Create CAR</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="lg:col-span-1">
+            <div id="helpPanel" class="bg-gray-800 rounded-lg p-6 shadow-xl sticky top-4">
+                <h2 class="text-lg font-semibold mb-4">í²¡ Tips</h2>
+                <div class="space-y-4 text-sm">
+                    <div><strong class="text-white">Be Specific</strong><p class="text-gray-400">Include when, where, and what you observed</p></div>
+                    <div><strong class="text-white">Add Photos</strong><p class="text-gray-400">Visual evidence helps with analysis</p></div>
+                    <div><strong class="text-white">Natural Language</strong><p class="text-gray-400">Write as you would tell a colleague</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const descriptionArea = document.getElementById('carDescription');
+let analysisTimer;
+
+descriptionArea.addEventListener('input', function() {
+    clearTimeout(analysisTimer);
+    if (this.value.length > 30) {
+        analysisTimer = setTimeout(async () => {
+            try {
+                const response = await fetch('/wizard/api/analyze-car', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({description: descriptionArea.value})
+                });
+                const data = await response.json();
+                if (data.success) {
+                    document.getElementById('aiAnalysis').classList.remove('hidden');
+                    document.getElementById('detectedCategory').textContent = data.analysis.category;
+                    document.getElementById('detectedSeverity').textContent = data.analysis.severity;
+                }
+            } catch (error) {
+                console.error('Analysis error:', error);
+            }
+        }, 1000);
+    }
+});
+
+document.getElementById('photoInput').addEventListener('change', function(e) {
+    const preview = document.getElementById('photoPreview');
+    preview.innerHTML = '';
+    Array.from(this.files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.className = 'w-24 h-24 object-cover rounded-lg border border-gray-600';
+            preview.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+    });
+});
+
+function showHelp(topic) {
+    const helpContent = {
+        'description': 'Describe what you observed in natural language. Include: What happened, When it occurred, Where it took place, Why it matters for food safety.'
+    };
+    alert(helpContent[topic] || 'Help information');
+}
+</script>
+{% endblock %}

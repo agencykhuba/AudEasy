@@ -107,3 +107,7 @@ from code.routes.wizard import wizard_bp
 app.register_blueprint(wizard_bp)
 
 print("Wizard routes registered at /wizard")
+
+# Register CAR routes
+from code.routes.cars import cars_bp
+app.register_blueprint(cars_bp)
