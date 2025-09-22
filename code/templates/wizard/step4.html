@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% block title %}Smart Setup Wizard - Step 4{% endblock %}
+{% block content %}
+<div class="container mx-auto px-4 py-8 max-w-4xl">
+    <div class="mb-8">
+        <div class="flex justify-between items-center mb-2">
+            <span class="text-sm font-medium">Step 4 of 5</span>
+            <span class="text-sm text-gray-400">Review & Confirm</span>
+        </div>
+        <div class="w-full bg-gray-700 rounded-full h-2">
+            <div class="bg-blue-400 h-2 rounded-full" style="width: 80%"></div>
+        </div>
+    </div>
+
+    <div class="bg-gray-800 rounded-lg p-8 shadow-xl">
+        <h1 class="text-3xl font-bold mb-2">Review Your Setup</h1>
+        <p class="text-gray-300 mb-8">Please verify all information before completing setup.</p>
+
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold mb-4 flex items-center">
+                <span class="mr-2">Ìø¢</span> Business Information
+            </h2>
+            <div class="bg-gray-700 rounded-lg p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <div class="text-sm text-gray-400">Industry</div>
+                        <div class="font-medium">{{ business_info.industry.name }}</div>
+                    </div>
+                    <div>
+                        <div class="text-sm text-gray-400">Location</div>
+                        <div class="font-medium">{{ business_info.location.city }}, {{ business_info.location.country }}</div>
+                    </div>
+                    <div>
+                        <div class="text-sm text-gray-400">Business Size</div>
+                        <div class="font-medium">{{ business_info.size }} locations</div>
+                    </div>
+                    <div>
+                        <div class="text-sm text-gray-400">Applicable Standards</div>
+                        <div class="font-medium">{{ business_info.standards|join(', ') }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold mb-4 flex items-center">
+                <span class="mr-2">Ì≥ã</span> Selected Templates
+            </h2>
+            <div class="bg-gray-700 rounded-lg p-6">
+                <div class="space-y-2">
+                    {% for template in templates %}
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>{{ template }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold mb-4 flex items-center">
+                <span class="mr-2">Ì¥ç</span> Your First CAR
+            </h2>
+            <div class="bg-gray-700 rounded-lg p-6">
+                <div class="mb-4">
+                    <div class="text-sm text-gray-400 mb-2">Description</div>
+                    <div class="text-sm bg-gray-800 p-4 rounded">{{ car_data.raw_description }}</div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <div class="text-sm text-gray-400">Category</div>
+                        <div class="font-medium">{{ car_data.parsed_data.category[0] }}</div>
+                    </div>
+                    <div>
+                        <div class="text-sm text-gray-400">Severity</div>
+                        <div class="font-medium capitalize">{{ car_data.parsed_data.severity[0] }}</div>
+                    </div>
+                    <div>
+                        <div class="text-sm text-gray-400">Location</div>
+                        <div class="font-medium">{{ car_data.parsed_data.location or 'Not specified' }}</div>
+                    </div>
+                </div>
+
+                {% if car_data.parsed_data.suggested_actions %}
+                <div class="mt-4">
+                    <div class="text-sm text-gray-400 mb-2">Suggested Actions</div>
+                    <div class="space-y-1 text-sm">
+                        {% for action in car_data.parsed_data.suggested_actions %}
+                        <div>{{ loop.index }}. {{ action.action }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="flex justify-between items-center">
+            <a href="/wizard/step3" class="text-gray-400 hover:text-white transition">‚Üê Back to Edit</a>
+            <div class="flex gap-3">
+                <button onclick="startOver()" class="px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white font-medium rounded-lg transition">Start Over</button>
+                <button onclick="completeSetup()" class="px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-medium rounded-lg transition">Complete Setup ‚Üí</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function startOver() {
+    if (confirm('Are you sure you want to start over? All progress will be lost.')) {
+        window.location.href = '/wizard/start';
+    }
+}
+
+async function completeSetup() {
+    try {
+        const response = await fetch('/wizard/complete', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'}
+        });
+        const data = await response.json();
+        if (data.success) {
+            window.location.href = '/wizard/success';
+        } else {
+            alert('Error completing setup. Please try again.');
+        }
+    } catch (error) {
+        console.error('Setup completion error:', error);
+        alert('Error completing setup. Please try again.');
+    }
+}
+</script>
+{% endblock %}

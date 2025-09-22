@@ -137,3 +137,47 @@ def complete_wizard():
     wizard_sessions[session_id].completed_at = datetime.now()
     
     return jsonify({'success': True, 'message': 'Setup wizard completed successfully!', 'redirect': '/dashboard'})
+
+@wizard_bp.route('/success', methods=['GET'])
+def wizard_success():
+    """Show success page after wizard completion"""
+    return render_template('wizard/step5_success.html')
+
+@wizard_bp.route('/save-to-database', methods=['POST'])
+def save_wizard_to_database():
+    """Save wizard data to PostgreSQL database"""
+    session_id = session.get('wizard_session_id')
+    if not session_id or session_id not in wizard_sessions:
+        return jsonify({'error': 'Invalid session'}), 400
+    
+    wizard_session = wizard_sessions[session_id]
+    
+    try:
+        # TODO: Database integration when models are ready
+        # car = Car(
+        #     car_number=generate_car_number(),
+        #     description=wizard_session.car_data['raw_description'],
+        #     category=wizard_session.car_data['parsed_data']['category'][0],
+        #     severity=wizard_session.car_data['parsed_data']['severity'][0],
+        #     location=wizard_session.car_data['parsed_data']['location'],
+        #     status='open'
+        # )
+        # db.session.add(car)
+        # db.session.commit()
+        
+        return jsonify({
+            'success': True,
+            'car_id': 'PLACEHOLDER_ID',
+            'message': 'CAR saved successfully'
+        })
+    
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+def generate_car_number():
+    """Generate unique CAR tracking number"""
+    from datetime import datetime
+    import random
+    date_str = datetime.now().strftime('%Y%m%d')
+    random_num = random.randint(1000, 9999)
+    return f"CAR-{date_str}-{random_num}"
