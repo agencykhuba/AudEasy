@@ -48,3 +48,8 @@ def get_smart_defaults():
     data = request.get_json()
     defaults = smart_defaults.get_defaults(1, 'car_creation', data.get('context', {}))
     return jsonify({'success': True, 'defaults': defaults})
+
+@cars_bp.route('/create/enhanced', methods=['GET'])
+def create_car_enhanced():
+    """Show enhanced CAR creation form"""
+    return render_template('cars/create_enhanced.html')
