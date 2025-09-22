@@ -99,3 +99,11 @@ try:
     
 except Exception as e:
     logging.error(f"Failed to integrate CCC monitoring: {e}")
+
+# Import wizard blueprint
+from code.routes.wizard import wizard_bp
+
+# Register wizard blueprint
+app.register_blueprint(wizard_bp)
+
+print("Wizard routes registered at /wizard")
