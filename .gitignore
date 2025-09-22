@@ -4,3 +4,12 @@ __pycache__/
 .env
 code/insert_test_user_render.py
 code/insert_test_user_render.py
+
+# Development utilities (not for production)
+test_*.py
+analyze_*.py
+check_*.py
+fix_*.py
+update_*.py
+credential_*.py
+*.backup
