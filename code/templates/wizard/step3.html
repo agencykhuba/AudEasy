@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% block title %}Smart Setup Wizard - Step 3{% endblock %}
+{% block content %}
+<div class="container mx-auto px-4 py-8 max-w-4xl">
+    <div class="mb-8">
+        <div class="flex justify-between items-center mb-2">
+            <span class="text-sm font-medium">Step 3 of 5</span>
+            <span class="text-sm text-gray-400">Create your first CAR</span>
+        </div>
+        <div class="w-full bg-gray-700 rounded-full h-2">
+            <div class="bg-blue-400 h-2 rounded-full" style="width: 60%"></div>
+        </div>
+    </div>
+    <div class="bg-gray-800 rounded-lg p-8 shadow-xl">
+        <h1 class="text-3xl font-bold mb-2">Describe the Issue Ì¥ç</h1>
+        <p class="text-gray-300 mb-8">Tell us what happened in your own words. Our AI will help structure it into a proper CAR.</p>
+        <form id="carForm" method="POST" action="/wizard/process-step3">
+            <div class="mb-6">
+                <label class="block text-sm font-medium mb-2">What happened? <span class="text-blue-400">(Describe the issue naturally)</span></label>
+                <textarea id="carDescription" name="description" rows="6" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent resize-none" placeholder="Example: Today at lunch rush, I noticed the walk-in cooler temperature was at 8¬∞C instead of 4¬∞C. The chicken and dairy products felt warm to touch..." required></textarea>
+                <p class="text-sm text-gray-400 mt-2">Ì≤° Include: What you saw, when it happened, where, and why it matters</p>
+            </div>
+            <div class="mb-6">
+                <label class="block text-sm font-medium mb-2">Add Photos (Optional)</label>
+                <div class="border-2 border-dashed border-gray-600 rounded-lg p-6 text-center">
+                    <input type="file" id="photoInput" name="photos" accept="image/*" multiple class="hidden" capture="environment">
+                    <button type="button" onclick="document.getElementById('photoInput').click()" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition">Ì≥∑ Take/Upload Photos</button>
+                    <p class="text-sm text-gray-400 mt-2">or drag and drop here</p>
+                    <div id="photoPreview" class="mt-4 flex flex-wrap gap-2 justify-center"></div>
+                </div>
+            </div>
+            <div id="aiAnalysis" class="hidden mb-6 p-6 bg-gradient-to-r from-blue-900/30 to-purple-900/30 rounded-lg border border-blue-400">
+                <h3 class="font-semibold mb-4 text-blue-400 flex items-center"><span class="mr-2">Ì¥ñ</span> AI Analysis Complete</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <div class="text-sm text-gray-400 mb-1">Category</div>
+                        <div id="detectedCategory" class="font-medium text-lg">Temperature Control</div>
+                        <div id="categoryConfidence" class="text-xs text-green-400 mt-1">92% confidence</div>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <div class="text-sm text-gray-400 mb-1">Severity</div>
+                        <div id="detectedSeverity" class="font-medium text-lg flex items-center"><span class="w-3 h-3 rounded-full bg-red-500 mr-2"></span>Critical</div>
+                        <div id="severityReason" class="text-xs text-gray-400 mt-1">Food safety risk detected</div>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <div class="text-sm text-gray-400 mb-1">Related Standards</div>
+                        <div id="detectedStandards" class="font-medium text-sm space-y-1"><div>CFIA 4.2 - Cold Storage</div></div>
+                    </div>
+                    <div class="bg-gray-800 p-4 rounded-lg">
+                        <div class="text-sm text-gray-400 mb-1">Immediate Actions</div>
+                        <div id="suggestedActions" class="text-sm space-y-1"><div>1. Discard affected products</div><div>2. Call refrigeration tech</div><div>3. Monitor hourly</div></div>
+                    </div>
+                </div>
+                <div class="mt-4 p-4 bg-gray-800 rounded-lg">
+                    <div class="text-sm text-gray-400 mb-2">Ì≥ù Extracted Information:</div>
+                    <div class="grid grid-cols-2 gap-2 text-sm">
+                        <div><span class="text-gray-400">Location:</span> <span id="detectedLocation">Walk-in cooler</span></div>
+                        <div><span class="text-gray-400">When:</span> <span id="detectedTime">Today at lunch rush</span></div>
+                        <div><span class="text-gray-400">Products affected:</span> <span id="detectedProducts">Chicken, dairy</span></div>
+                        <div><span class="text-gray-400">Confidence:</span> <span id="confidenceScore">High (0.92)</span></div>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-400 mt-4">‚úèÔ∏è You can edit any of these fields on the next step</p>
+            </div>
+            <div class="flex justify-between items-center mt-8">
+                <a href="/wizard/step2" class="text-gray-400 hover:text-white transition">‚Üê Back to Templates</a>
+                <button type="submit" class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition">Review & Confirm ‚Üí</button>
+            </div>
+        </form>
+    </div>
+    <div class="mt-6 p-4 bg-gray-800 rounded-lg border border-gray-700">
+        <h3 class="font-semibold mb-3">Ì≤° Good Description Examples:</h3>
+        <div class="space-y-2 text-sm text-gray-400">
+            <div class="pl-4"><strong class="text-white">Food Safety:</strong> "Found mouse droppings near dry storage area this morning. The gaps under the back door are wide enough for rodents to enter."</div>
+            <div class="pl-4"><strong class="text-white">Equipment:</strong> "The dishwasher temperature dropped to 65¬∞C during dinner service. Dishes came out with visible food residue."</div>
+            <div class="pl-4"><strong class="text-white">Personnel:</strong> "Caught prep cook not wearing gloves while handling ready-to-eat salad. This is the third time this month."</div>
+        </div>
+    </div>
+</div>
+<script>
+document.getElementById('photoInput').addEventListener('change', function(e) {
+    const preview = document.getElementById('photoPreview');
+    preview.innerHTML = '';
+    Array.from(this.files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.className = 'w-24 h-24 object-cover rounded-lg border border-gray-600';
+            preview.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+    });
+});
+
+const descriptionArea = document.getElementById('carDescription');
+const analysisDiv = document.getElementById('aiAnalysis');
+let analysisTimer;
+
+descriptionArea.addEventListener('input', function() {
+    clearTimeout(analysisTimer);
+    if (this.value.length > 30) {
+        analysisTimer = setTimeout(async () => {
+            try {
+                const response = await fetch('/wizard/api/analyze-car', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({description: descriptionArea.value})
+                });
+                const data = await response.json();
+                if (data.success) {
+                    analysisDiv.classList.remove('hidden');
+                    const analysis = data.analysis;
+                    document.getElementById('detectedCategory').textContent = analysis.category;
+                    document.getElementById('categoryConfidence').textContent = `${Math.round(analysis.category_confidence * 100)}% confidence`;
+                    const severityColors = {'critical': 'bg-red-500', 'major': 'bg-orange-500', 'minor': 'bg-yellow-500'};
+                    document.getElementById('detectedSeverity').innerHTML = `<span class="w-3 h-3 rounded-full ${severityColors[analysis.severity]} mr-2"></span>${analysis.severity.charAt(0).toUpperCase() + analysis.severity.slice(1)}`;
+                    document.getElementById('severityReason').textContent = analysis.severity_reason;
+                    if (analysis.related_standards?.length) document.getElementById('detectedStandards').innerHTML = analysis.related_standards.map(s => `<div>${s}</div>`).join('');
+                    if (analysis.suggested_actions?.length) document.getElementById('suggestedActions').innerHTML = analysis.suggested_actions.map((a, i) => `<div>${i + 1}. ${a.action}</div>`).join('');
+                    document.getElementById('detectedLocation').textContent = analysis.location || 'Not detected';
+                    document.getElementById('detectedTime').textContent = analysis.when || 'Not specified';
+                    document.getElementById('detectedProducts').textContent = analysis.affected_products.join(', ') || 'None identified';
+                    document.getElementById('confidenceScore').textContent = `${analysis.confidence_score >= 0.7 ? 'High' : analysis.confidence_score >= 0.5 ? 'Medium' : 'Low'} (${analysis.confidence_score.toFixed(2)})`;
+                }
+            } catch (error) {
+                console.error('AI analysis error:', error);
+            }
+        }, 1000);
+    } else {
+        analysisDiv.classList.add('hidden');
+    }
+});
+
+document.getElementById('carForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    try {
+        const response = await fetch('/wizard/process-step3', {
+            method: 'POST',
+            body: formData
+        });
+        const data = await response.json();
+        if (data.success) {
+            window.location.href = data.next_step;
+        } else {
+            alert('Error processing CAR. Please try again.');
+        }
+    } catch (error) {
+        console.error('Form submission error:', error);
+        alert('Error processing CAR. Please try again.');
+    }
+});
+</script>
+{% endblock %}
