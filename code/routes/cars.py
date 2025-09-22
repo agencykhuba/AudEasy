@@ -39,3 +39,12 @@ def list_cars():
     """List all CARs"""
     # TODO: Fetch from database
     return render_template('cars/list.html', cars=[])
+
+from code.services.smart_defaults import SmartDefaultsEngine
+smart_defaults = SmartDefaultsEngine()
+
+@cars_bp.route('/api/smart-defaults', methods=['POST'])
+def get_smart_defaults():
+    data = request.get_json()
+    defaults = smart_defaults.get_defaults(1, 'car_creation', data.get('context', {}))
+    return jsonify({'success': True, 'defaults': defaults})
