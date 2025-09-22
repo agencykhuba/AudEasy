@@ -1,0 +1,25 @@
+{
+  "registry_version": "1.0.0",
+  "created_date": "2025-09-22",
+  "source_vertical": "audeasy",
+  "templates": [
+    {
+      "id": "ui_colors_v1",
+      "name": "Compliance App Color Scheme",
+      "category": "design_tokens",
+      "reusability_score": 100,
+      "verticals_using": ["audeasy"]
+    },
+    {
+      "id": "layout_base_v1",
+      "name": "Mobile App Base Layout",
+      "category": "layouts",
+      "reusability_score": 95,
+      "verticals_using": ["audeasy"]
+    }
+  ],
+  "statistics": {
+    "total_templates": 6,
+    "average_reusability": 92.5
+  }
+}

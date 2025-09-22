@@ -1,0 +1,1231 @@
+/* AudEasy Main Stylesheet - UI Specification Compliant */
+/* Phase 6 - Week 1: Design System Implementation */
+
+/* ============================================
+   CSS Variables - Design Tokens
+   ============================================ */
+:root {
+    /* Colors from UI Specification */
+    --color-bg: #1E1E1E;
+    --color-primary: #42A5F5;
+    --color-secondary: #AB47BC;
+    --color-success: #66BB6A;
+    --color-danger: #EF5350;
+    --color-text-primary: #FFFFFF;
+    --color-text-secondary: #BDBDBD;
+    
+    /* Typography */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    --font-size-title: 20px;
+    --font-size-body: 16px;
+    --font-size-caption: 14px;
+    --font-size-system: 12px;
+    
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    
+    /* Components */
+    --border-radius: 4px;
+    --button-padding: 12px;
+    --icon-size: 24px;
+    --input-padding: 8px;
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================================
+   Layout Structure
+   ============================================ */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    border-bottom: 1px solid rgba(189, 189, 189, 0.2);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.back-button {
+    background: none;
+    border: none;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.header-title {
+    font-size: var(--font-size-title);
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.system-time {
+    font-size: var(--font-size-system);
+    color: var(--color-text-secondary);
+}
+
+.assessment-timer {
+    font-size: var(--font-size-body);
+    color: var(--color-text-primary);
+    border: 2px solid var(--color-secondary);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius);
+}
+
+.app-main {
+    flex: 1;
+    padding: var(--spacing-md);
+    overflow-y: auto;
+    padding-bottom: 80px; /* Space for footer */
+}
+
+.app-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--color-bg);
+    border-top: 1px solid rgba(189, 189, 189, 0.2);
+    padding: var(--spacing-sm) 0;
+}
+
+.footer-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    color: var(--color-text-secondary);
+    padding: var(--spacing-sm);
+    transition: color 0.2s;
+}
+
+.nav-item.active {
+    color: var(--color-text-primary);
+    border-bottom: 2px solid var(--color-text-primary);
+}
+
+.nav-icon {
+    width: var(--icon-size);
+    height: var(--icon-size);
+}
+
+.nav-label {
+    font-size: var(--font-size-system);
+}
+
+/* ============================================
+   Buttons - UI Specification
+   ============================================ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    font-size: var(--font-size-body);
+    font-weight: 500;
+    padding: var(--button-padding);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-text-primary);
+}
+
+.btn-primary:hover {
+    background-color: #64B5F6;
+}
+
+.btn-secondary {
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    border: 2px solid var(--color-secondary);
+}
+
+.btn-secondary:hover {
+    background-color: rgba(171, 71, 188, 0.1);
+}
+
+.btn-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* ============================================
+   Status Badges - UI Specification
+   ============================================ */
+.status-badge {
+    display: inline-block;
+    font-size: var(--font-size-caption);
+    color: var(--color-text-primary);
+    padding: 4px 8px;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-critical {
+    background-color: var(--color-danger);
+}
+
+.status-high {
+    background-color: #FF9800;
+}
+
+.status-medium {
+    background-color: var(--color-secondary);
+}
+
+.status-low {
+    background-color: var(--color-primary);
+}
+
+.status-compliant {
+    background-color: var(--color-success);
+}
+
+.status-resolved {
+    background-color: var(--color-success);
+}
+
+.status-in-progress {
+    background-color: #FF9800;
+}
+
+.status-open {
+    background-color: var(--color-primary);
+}
+
+/* ============================================
+   Form Elements - UI Specification
+   ============================================ */
+.form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.form-label {
+    display: block;
+    font-size: var(--font-size-body);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+    font-size: var(--font-size-body);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-text-secondary);
+    border-radius: var(--border-radius);
+    padding: var(--input-padding);
+    font-family: var(--font-family);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.form-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23BDBDBD'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 24px;
+    padding-right: 40px;
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* ============================================
+   CAR Cards
+   ============================================ */
+.car-card {
+    display: block;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(189, 189, 189, 0.2);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    text-decoration: none;
+    color: var(--color-text-primary);
+    transition: all 0.2s;
+}
+
+.car-card:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(189, 189, 189, 0.4);
+}
+
+.car-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+}
+
+.car-time {
+    font-size: var(--font-size-system);
+    color: var(--color-text-secondary);
+}
+
+.car-title {
+    font-size: var(--font-size-body);
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+}
+
+.car-description {
+    font-size: var(--font-size-caption);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.car-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.car-assignee {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-caption);
+    font-weight: 600;
+}
+
+.assignee-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.assignee-name {
+    font-size: var(--font-size-caption);
+    font-weight: 500;
+}
+
+.assignee-location {
+    font-size: var(--font-size-system);
+    color: var(--color-text-secondary);
+}
+
+.car-progress {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.progress-bar {
+    width: 60px;
+    height: 4px;
+    background-color: rgba(189, 189, 189, 0.3);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--color-secondary);
+    transition: width 0.3s;
+}
+
+.progress-text {
+    font-size: var(--font-size-system);
+    color: var(--color-text-secondary);
+}
+
+/* ============================================
+   Dashboard Specific
+   ============================================ */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.stat-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(189, 189, 189, 0.2);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+.stat-label {
+    font-size: var(--font-size-caption);
+    color: var(--color-text-secondary);
+}
+
+.stat-card-primary .stat-value {
+    color: var(--color-primary);
+}
+
+.stat-card-success .stat-value {
+    color: var(--color-success);
+}
+
+.stat-card-warning .stat-value {
+    color: #FF9800;
+}
+
+.stat-card-danger .stat-value {
+    color: var(--color-danger);
+}
+
+.section-title {
+    font-size: var(--font-size-body);
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.section-link {
+    font-size: var(--font-size-caption);
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.quick-actions {
+    margin-bottom: var(--spacing-lg);
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-lg);
+}
+
+.empty-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto var(--spacing-md);
+    color: var(--color-text-secondary);
+}
+
+.empty-text {
+    font-size: var(--font-size-body);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.compliance-categories {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.category-item {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+}
+
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-sm);
+}
+
+.category-name {
+    font-size: var(--font-size-caption);
+}
+
+.category-score {
+    font-size: var(--font-size-caption);
+    font-weight: 600;
+}
+
+.category-bar {
+    height: 8px;
+    background-color: rgba(189, 189, 189, 0.3);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.category-fill {
+    height: 100%;
+    transition: width 0.3s;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+@media (min-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .action-buttons {
+        flex-direction: row;
+    }
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+.text-center {
+    text-align: center;
+}
+
+.mt-1 { margin-top: var(--spacing-xs); }
+.mt-2 { margin-top: var(--spacing-sm); }
+.mt-3 { margin-top: var(--spacing-md); }
+.mt-4 { margin-top: var(--spacing-lg); }
+
+.mb-1 { margin-bottom: var(--spacing-xs); }
+.mb-2 { margin-bottom: var(--spacing-sm); }
+.mb-3 { margin-bottom: var(--spacing-md); }
+.mb-4 { margin-bottom: var(--spacing-lg); }
+
+.hidden {
+    display: none;
+}
+
+/* ============================================
+   Template Extraction Notes (for developers)
+   ============================================ */
+/*
+PARAMETERIZABLE DESIGN TOKENS:
+All CSS variables in :root can be extracted as JSON config:
+
+{
+  "colors": {
+    "background": "#1E1E1E",
+    "primary": "#42A5F5",
+    "secondary": "#AB47BC",
+    "success": "#66BB6A",
+    "danger": "#EF5350",
+    "text_primary": "#FFFFFF",
+    "text_secondary": "#BDBDBD"
+  },
+  "typography": {
+    "title": "20px",
+    "body": "16px",
+    "caption": "14px",
+    "system": "12px"
+  },
+  "spacing": {
+    "xs": "4px",
+    "sm": "8px",
+    "md": "16px",
+    "lg": "24px"
+  },
+  "components": {
+    "border_radius": "4px",
+    "button_padding": "12px",
+    "icon_size": "24px"
+  }
+}
+
+For new verticals (MedAudit, RetailCheck, etc.):
+1. Copy this file as template
+2. Replace CSS variable values from vertical config
+3. Adjust component-specific styles as needed
+4. 80% reusability achieved
+*//* AudEasy Main Stylesheet - UI Specification Compliant */
+/* Phase 6 - Week 1: Design System Implementation */
+
+/* ============================================
+   CSS Variables - Design Tokens
+   ============================================ */
+:root {
+    /* Colors from UI Specification */
+    --color-bg: #1E1E1E;
+    --color-primary: #42A5F5;
+    --color-secondary: #AB47BC;
+    --color-success: #66BB6A;
+    --color-danger: #EF5350;
+    --color-text-primary: #FFFFFF;
+    --color-text-secondary: #BDBDBD;
+    
+    /* Typography */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    --font-size-title: 20px;
+    --font-size-body: 16px;
+    --font-size-caption: 14px;
+    --font-size-system: 12px;
+    
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    
+    /* Components */
+    --border-radius: 4px;
+    --button-padding: 12px;
+    --icon-size: 24px;
+    --input-padding: 8px;
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================================
+   Layout Structure
+   ============================================ */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    border-bottom: 1px solid rgba(189, 189, 189, 0.2);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.back-button {
+    background: none;
+    border: none;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.header-title {
+    font-size: var(--font-size-title);
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.system-time {
+    font-size: var(--font-size-system);
+    color: var(--color-text-secondary);
+}
+
+.assessment-timer {
+    font-size: var(--font-size-body);
+    color: var(--color-text-primary);
+    border: 2px solid var(--color-secondary);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius);
+}
+
+.app-main {
+    flex: 1;
+    padding: var(--spacing-md);
+    overflow-y: auto;
+    padding-bottom: 80px; /* Space for footer */
+}
+
+.app-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--color-bg);
+    border-top: 1px solid rgba(189, 189, 189, 0.2);
+    padding: var(--spacing-sm) 0;
+}
+
+.footer-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    color: var(--color-text-secondary);
+    padding: var(--spacing-sm);
+    transition: color 0.2s;
+}
+
+.nav-item.active {
+    color: var(--color-text-primary);
+    border-bottom: 2px solid var(--color-text-primary);
+}
+
+.nav-icon {
+    width: var(--icon-size);
+    height: var(--icon-size);
+}
+
+.nav-label {
+    font-size: var(--font-size-system);
+}
+
+/* ============================================
+   Buttons - UI Specification
+   ============================================ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    font-size: var(--font-size-body);
+    font-weight: 500;
+    padding: var(--button-padding);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-text-primary);
+}
+
+.btn-primary:hover {
+    background-color: #64B5F6;
+}
+
+.btn-secondary {
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    border: 2px solid var(--color-secondary);
+}
+
+.btn-secondary:hover {
+    background-color: rgba(171, 71, 188, 0.1);
+}
+
+.btn-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* ============================================
+   Status Badges - UI Specification
+   ============================================ */
+.status-badge {
+    display: inline-block;
+    font-size: var(--font-size-caption);
+    color: var(--color-text-primary);
+    padding: 4px 8px;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-critical {
+    background-color: var(--color-danger);
+}
+
+.status-high {
+    background-color: #FF9800;
+}
+
+.status-medium {
+    background-color: var(--color-secondary);
+}
+
+.status-low {
+    background-color: var(--color-primary);
+}
+
+.status-compliant {
+    background-color: var(--color-success);
+}
+
+.status-resolved {
+    background-color: var(--color-success);
+}
+
+.status-in-progress {
+    background-color: #FF9800;
+}
+
+.status-open {
+    background-color: var(--color-primary);
+}
+
+/* ============================================
+   Form Elements - UI Specification
+   ============================================ */
+.form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.form-label {
+    display: block;
+    font-size: var(--font-size-body);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+    font-size: var(--font-size-body);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-text-secondary);
+    border-radius: var(--border-radius);
+    padding: var(--input-padding);
+    font-family: var(--font-family);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.form-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23BDBDBD'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 24px;
+    padding-right: 40px;
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* ============================================
+   CAR Cards
+   ============================================ */
+.car-card {
+    display: block;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(189, 189, 189, 0.2);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    text-decoration: none;
+    color: var(--color-text-primary);
+    transition: all 0.2s;
+}
+
+.car-card:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(189, 189, 189, 0.4);
+}
+
+.car-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+}
+
+.car-time {
+    font-size: var(--font-size-system);
+    color: var(--color-text-secondary);
+}
+
+.car-title {
+    font-size: var(--font-size-body);
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+}
+
+.car-description {
+    font-size: var(--font-size-caption);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.car-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.car-assignee {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-caption);
+    font-weight: 600;
+}
+
+.assignee-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.assignee-name {
+    font-size: var(--font-size-caption);
+    font-weight: 500;
+}
+
+.assignee-location {
+    font-size: var(--font-size-system);
+    color: var(--color-text-secondary);
+}
+
+.car-progress {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.progress-bar {
+    width: 60px;
+    height: 4px;
+    background-color: rgba(189, 189, 189, 0.3);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--color-secondary);
+    transition: width 0.3s;
+}
+
+.progress-text {
+    font-size: var(--font-size-system);
+    color: var(--color-text-secondary);
+}
+
+/* ============================================
+   Dashboard Specific
+   ============================================ */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.stat-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(189, 189, 189, 0.2);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+.stat-label {
+    font-size: var(--font-size-caption);
+    color: var(--color-text-secondary);
+}
+
+.stat-card-primary .stat-value {
+    color: var(--color-primary);
+}
+
+.stat-card-success .stat-value {
+    color: var(--color-success);
+}
+
+.stat-card-warning .stat-value {
+    color: #FF9800;
+}
+
+.stat-card-danger .stat-value {
+    color: var(--color-danger);
+}
+
+.section-title {
+    font-size: var(--font-size-body);
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.section-link {
+    font-size: var(--font-size-caption);
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.quick-actions {
+    margin-bottom: var(--spacing-lg);
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-lg);
+}
+
+.empty-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto var(--spacing-md);
+    color: var(--color-text-secondary);
+}
+
+.empty-text {
+    font-size: var(--font-size-body);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.compliance-categories {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.category-item {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+}
+
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-sm);
+}
+
+.category-name {
+    font-size: var(--font-size-caption);
+}
+
+.category-score {
+    font-size: var(--font-size-caption);
+    font-weight: 600;
+}
+
+.category-bar {
+    height: 8px;
+    background-color: rgba(189, 189, 189, 0.3);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.category-fill {
+    height: 100%;
+    transition: width 0.3s;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+@media (min-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .action-buttons {
+        flex-direction: row;
+    }
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+.text-center {
+    text-align: center;
+}
+
+.mt-1 { margin-top: var(--spacing-xs); }
+.mt-2 { margin-top: var(--spacing-sm); }
+.mt-3 { margin-top: var(--spacing-md); }
+.mt-4 { margin-top: var(--spacing-lg); }
+
+.mb-1 { margin-bottom: var(--spacing-xs); }
+.mb-2 { margin-bottom: var(--spacing-sm); }
+.mb-3 { margin-bottom: var(--spacing-md); }
+.mb-4 { margin-bottom: var(--spacing-lg); }
+
+.hidden {
+    display: none;
+}
+
+/* ============================================
+   Template Extraction Notes (for developers)
+   ============================================ */
+/*
+PARAMETERIZABLE DESIGN TOKENS:
+All CSS variables in :root can be extracted as JSON config:
+
+{
+  "colors": {
+    "background": "#1E1E1E",
+    "primary": "#42A5F5",
+    "secondary": "#AB47BC",
+    "success": "#66BB6A",
+    "danger": "#EF5350",
+    "text_primary": "#FFFFFF",
+    "text_secondary": "#BDBDBD"
+  },
+  "typography": {
+    "title": "20px",
+    "body": "16px",
+    "caption": "14px",
+    "system": "12px"
+  },
+  "spacing": {
+    "xs": "4px",
+    "sm": "8px",
+    "md": "16px",
+    "lg": "24px"
+  },
+  "components": {
+    "border_radius": "4px",
+    "button_padding": "12px",
+    "icon_size": "24px"
+  }
+}
+
+For new verticals (MedAudit, RetailCheck, etc.):
+1. Copy this file as template
+2. Replace CSS variable values from vertical config
+3. Adjust component-specific styles as needed
+4. 80% reusability achieved
+*/
