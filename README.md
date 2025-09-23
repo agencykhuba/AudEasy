@@ -11,3 +11,15 @@ AudEasy is a mobile-first, AI-powered auditing platform with CAPA/CAR functional
 ## Structure
 - `Code/`: Application code (e.g., Flask backend, frontend).
 - `Documents/`: Project documentation (e.g., notes.txt, spec.json).
+## Local Development Setup
+
+### Running Locally (Windows)
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Start local development server
+python run_local.py
+
+# Access application at:
+# http://127.0.0.1:5000

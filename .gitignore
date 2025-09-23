@@ -13,3 +13,9 @@ fix_*.py
 update_*.py
 credential_*.py
 *.backup
+
+# Local development files - production uses Gunicorn with different import context
+code/__init__.py
+code/routes/__init__.py
+code/services/__init__.py
+code/models/__init__.py
