@@ -115,3 +115,7 @@ app.register_blueprint(cars_bp)
 # Feedback system
 from code.routes.feedback import feedback_bp
 app.register_blueprint(feedback_bp)
+
+# Register Quick Audit routes
+from code.routes.quick_audit import quick_audit_bp
+app.register_blueprint(quick_audit_bp)
