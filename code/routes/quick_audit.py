@@ -40,7 +40,7 @@ def quick_audit():
         })
     
     # GET - show quick audit form
-    return render_template('quick_audit.html',
+    return render_template('audits/quick_audit.html',
         critical_checks=audit_engine.CRITICAL_CHECKS,
         audit_time='5 minutes',
         required_frequency='Daily before shift'

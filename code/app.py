@@ -123,3 +123,8 @@ app.register_blueprint(quick_audit_bp)
 # Development server (local only - production uses Gunicorn)
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
+
+# Temporary dashboard route
+@app.route('/dashboard')
+def dashboard():
+    return jsonify({"message": "Dashboard coming soon"})
