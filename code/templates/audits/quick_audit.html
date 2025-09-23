@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    <form id="quickAuditForm" method="POST" class="space-y-6">
+    <form id="quickAuditForm" method="POST" action="{{ url_for('quick_audit.quick_audit') }}" class="space-y-6">
         
         <!-- Temperature Control Section -->
         <div class="bg-gray-800 rounded-lg p-6">
@@ -264,7 +264,7 @@ document.getElementById('quickAuditForm').addEventListener('submit', async funct
     const formData = new FormData(this);
     const data = Object.fromEntries(formData);
     
-    const response = await fetch('/audit/quick', {
+    const response = await fetch("{{ url_for('quick_audit.quick_audit') }}", {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
