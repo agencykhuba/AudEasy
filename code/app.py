@@ -119,3 +119,7 @@ app.register_blueprint(feedback_bp)
 # Register Quick Audit routes
 from code.routes.quick_audit import quick_audit_bp
 app.register_blueprint(quick_audit_bp)
+
+# Development server (local only - production uses Gunicorn)
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=5000)
