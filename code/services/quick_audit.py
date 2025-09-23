@@ -101,13 +101,17 @@ class QuickAuditEngine:
     
     def create_emergency_car(self, failures: List[Dict]) -> int:
         """Auto-create CAR for critical failures"""
-        # TODO: Integrate with existing CAR system
-        description = "CRITICAL FAILURE - Pre-shift audit blocked operations:\n\n"
-        
-        for failure in failures:
-            description += f"- {failure['category']}: {failure['check']}\n"
-            description += f"  Expected: {failure['expected']}\n"
-            description += f"  Actual: {failure['actual']}\n\n"
-        
-        # Return mock CAR ID for now
-        return 999
+        try:
+            description = "CRITICAL FAILURE - Pre-shift audit blocked operations:\n\n"
+            
+            for failure in failures:
+                description += f"- {failure.get('category', 'Unknown')}: {failure.get('check', 'Unknown')}\n"
+                description += f"  Expected: {failure.get('expected', 'N/A')}\n"
+                description += f"  Actual: {failure.get('actual', 'N/A')}\n\n"
+            
+            # Return mock CAR ID for now
+            # TODO: Integrate with existing CAR system
+            return 999
+        except Exception as e:
+            print(f"Error creating emergency CAR: {e}")
+            return 999  # Return mock ID even on error
