@@ -4,10 +4,12 @@
 from flask import Blueprint, request, jsonify, render_template, flash, redirect, url_for
 from datetime import datetime
 from code.services.quick_audit import QuickAuditEngine
+from code.services.smart_defaults import SmartDefaultsEngine
 
 quick_audit_bp = Blueprint('quick_audit', __name__, url_prefix='/audit')
 
 audit_engine = QuickAuditEngine()
+smart_defaults = SmartDefaultsEngine()
 
 @quick_audit_bp.route('/quick', methods=['GET', 'POST'])
 def quick_audit():
