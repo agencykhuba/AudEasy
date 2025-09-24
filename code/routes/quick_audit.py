@@ -106,3 +106,40 @@ def audit_dashboard():
         stats=audit_stats,
         audit_tiers=audit_engine.audit_tiers
     )
+
+# Add to imports at top of file
+from code.services.smart_defaults import SmartDefaultsEngine
+
+# Initialize smart defaults engine
+smart_defaults = SmartDefaultsEngine()
+
+# Add before the existing route, new route for smart defaults API
+@quick_audit_bp.route('/smart-defaults', methods=['POST'])
+def get_smart_defaults():
+    """API endpoint for getting smart defaults based on context"""
+    data = request.get_json()
+    user_id = data.get('user_id', 'default_user')  # TODO: Get from session
+    location_context = data.get('location_context', {})
+    
+    defaults = smart_defaults.get_smart_defaults(user_id, location_context)
+    
+    return jsonify({
+        'defaults': defaults,
+        'status': 'success',
+        'message': f"Found {len(defaults)} smart defaults"
+    })
+
+@quick_audit_bp.route('/learn-pattern', methods=['POST'])  
+def learn_audit_pattern():
+    """Learn from completed audit for future predictions"""
+    data = request.get_json()
+    user_id = data.get('user_id', 'default_user')
+    location_context = data.get('location_context', {})
+    audit_data = data.get('audit_data', {})
+    
+    smart_defaults.learn_pattern(user_id, location_context, audit_data)
+    
+    return jsonify({
+        'status': 'success',
+        'message': 'Pattern learned successfully'
+    })
