@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+{% block title %}Smart Setup Wizard - Template Configuration{% endblock %}
+
+{% block content %}
+<div class="wizard-container">
+    <div class="wizard-progress">
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: 50%"></div>
+        </div>
+        <div class="progress-text">Step 2 of 4: Template Configuration</div>
+    </div>
+
+    <div class="wizard-content">
+        <div class="wizard-header">
+            <h1>Configure Your Compliance Templates</h1>
+            <p class="wizard-subtitle">We've pre-selected templates for {{ industry_name }}. Customize them for your needs.</p>
+        </div>
+
+        <div class="wizard-step">
+            <form id="step2-form" method="POST" action="/wizard/process-step2">
+                <input type="hidden" name="industry" value="{{ industry }}">
+                <input type="hidden" name="session_id" value="{{ session_id }}">
+
+                <div class="detection-result">
+                    <div class="detection-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <strong>Industry Detected: {{ industry_name }}</strong>
+                        {% if confidence %}
+                        <span class="confidence-badge">{{ (confidence * 100)|int }}% confidence</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="template-section">
+                    <h2>Select Compliance Templates</h2>
+                    <p class="section-description">Choose the templates that match your compliance requirements. You can always add more later.</p>
+
+                    <div class="template-grid">
+                        {% for template in available_templates %}
+                        <label class="template-card">
+                            <input type="checkbox" name="templates" value="{{ template.id }}" {% if template.recommended %}checked{% endif %}>
+                            <div class="template-content">
+                                <div class="template-header">
+                                    <h3>{{ template.name }}</h3>
+                                    {% if template.recommended %}
+                                    <span class="badge badge-recommended">Recommended</span>
+                                    {% endif %}
+                                </div>
+                                <p>{{ template.description }}</p>
+                                <div class="template-meta">
+                                    <span class="meta-item">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                        </svg>
+                                        {{ template.checklist_count }} checklists
+                                    </span>
+                                    <span class="meta-item">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                        </svg>
+                                        ~{{ template.setup_time }} min setup
+                                    </span>
+                                </div>
+                            </div>
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="requirements-section">
+                    <h2>Compliance Requirements</h2>
+                    <p class="section-description">Select any additional compliance standards you need to meet.</p>
+
+                    <div class="requirements-grid">
+                        {% for requirement in compliance_requirements %}
+                        <label class="requirement-item">
+                            <input type="checkbox" name="requirements" value="{{ requirement.id }}" {% if requirement.default %}checked{% endif %}>
+                            <div class="requirement-content">
+                                <div class="requirement-header">
+                                    <strong>{{ requirement.name }}</strong>
+                                    {% if requirement.mandatory %}
+                                    <span class="badge badge-mandatory">Required</span>
+                                    {% endif %}
+                                </div>
+                                <p>{{ requirement.description }}</p>
+                            </div>
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="details-section">
+                    <h2>Organization Details</h2>
+                    <p class="section-description">Help us customize your experience.</p>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="organization_name">Organization Name <span class="required">*</span></label>
+                            <input type="text" id="organization_name" name="organization_name" required placeholder="Your Business Name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="team_size">Team Size <span class="required">*</span></label>
+                            <select id="team_size" name="team_size" required>
+                                <option value="">Select size...</option>
+                                <option value="1-10">1-10 employees</option>
+                                <option value="11-50">11-50 employees</option>
+                                <option value="51-200">51-200 employees</option>
+                                <option value="201+">201+ employees</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="primary_location">Primary Location <span class="required">*</span></label>
+                            <input type="text" id="primary_location" name="primary_location" required placeholder="City, State/Province">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="timezone">Timezone <span class="required">*</span></label>
+                            <select id="timezone" name="timezone" required>
+                                <option value="">Select timezone...</option>
+                                <option value="America/Halifax">Atlantic Time (Halifax)</option>
+                                <option value="America/Toronto">Eastern Time (Toronto)</option>
+                                <option value="America/Chicago">Central Time (Chicago)</option>
+                                <option value="America/Denver">Mountain Time (Denver)</option>
+                                <option value="America/Los_Angeles">Pacific Time (Los Angeles)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wizard-actions">
+                    <a href="/wizard/start" class="btn btn-secondary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                        Back
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        Continue to Setup
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+.wizard-container{max-width:900px;margin:0 auto;padding:20px}.wizard-progress{margin-bottom:30px}.progress-bar{height:8px;background:#2A2A2A;border-radius:4px;overflow:hidden;margin-bottom:8px}.progress-fill{height:100%;background:linear-gradient(90deg,#42A5F5,#AB47BC);transition:width .3s ease}.progress-text{color:#BDBDBD;font-size:14px;text-align:center}.wizard-header{text-align:center;margin-bottom:40px}.wizard-header h1{font-size:28px;margin-bottom:12px;color:#FFF}.wizard-subtitle{color:#BDBDBD;font-size:16px}.detection-result{background:rgba(102,187,106,.1);border:1px solid rgba(102,187,106,.3);border-radius:8px;padding:16px;margin-bottom:32px;display:flex;align-items:center;gap:12px}.detection-icon{width:40px;height:40px;background:rgba(102,187,106,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#66BB6A;flex-shrink:0}.detection-result strong{color:#FFF;display:block;margin-bottom:4px}.confidence-badge{display:inline-block;background:rgba(102,187,106,.2);color:#66BB6A;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:500}.template-section,.requirements-section,.details-section{margin-bottom:40px}.template-section h2,.requirements-section h2,.details-section h2{font-size:20px;margin-bottom:8px;color:#FFF}.section-description{color:#BDBDBD;margin-bottom:20px;line-height:1.6}.template-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}.template-card{position:relative;display:block;cursor:pointer}.template-card input[type=checkbox]{position:absolute;opacity:0;pointer-events:none}.template-content{background:#2A2A2A;border:2px solid #3A3A3A;border-radius:8px;padding:20px;height:100%;transition:all .3s ease}.template-card input:checked+.template-content{border-color:#42A5F5;background:rgba(66,165,245,.05)}.template-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:12px}.template-header h3{font-size:16px;color:#FFF;margin:0}.template-content>p{color:#BDBDBD;font-size:14px;line-height:1.5;margin-bottom:12px}.template-meta{display:flex;gap:16px;flex-wrap:wrap}.meta-item{display:flex;align-items:center;gap:6px;color:#888;font-size:13px}.meta-item svg{flex-shrink:0}.badge{display:inline-block;padding:4px 8px;border-radius:4px;font-size:12px;font-weight:500;white-space:nowrap}.badge-recommended{background:rgba(66,165,245,.2);color:#42A5F5}.badge-mandatory{background:rgba(239,83,80,.2);color:#EF5350}.requirements-grid{display:flex;flex-direction:column;gap:12px}.requirement-item{display:flex;align-items:start;cursor:pointer;background:#2A2A2A;border:2px solid #3A3A3A;border-radius:8px;padding:16px;transition:all .3s ease}.requirement-item:hover{border-color:#4A4A4A}.requirement-item input[type=checkbox]{margin-top:2px;margin-right:12px;cursor:pointer;width:18px;height:18px;flex-shrink:0}.requirement-content{flex:1;opacity:.7;transition:opacity .3s ease}.requirement-item input:checked+.requirement-content{opacity:1}.requirement-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}.requirement-header strong{color:#FFF;font-size:15px}.requirement-content>p{color:#BDBDBD;font-size:13px;line-height:1.5;margin:0}.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}.form-group{display:flex;flex-direction:column}.form-group label{color:#FFF;font-size:14px;font-weight:500;margin-bottom:8px}.required{color:#EF5350}.form-group input,.form-group select{background:#2A2A2A;border:1px solid #3A3A3A;border-radius:6px;padding:12px;color:#FFF;font-size:14px;font-family:inherit;transition:border-color .3s ease}.form-group input:focus,.form-group select:focus{outline:0;border-color:#42A5F5}.form-group input::placeholder{color:#666}.form-group select{cursor:pointer}.form-group select option{background:#2A2A2A;color:#FFF}.wizard-actions{display:flex;justify-content:space-between;gap:16px;margin-top:40px;padding-top:30px;border-top:1px solid #3A3A3A}.btn{padding:14px 28px;border-radius:8px;font-size:16px;font-weight:500;cursor:pointer;transition:all .3s ease;border:none;display:flex;align-items:center;gap:8px;text-decoration:none}.btn-primary{background:#42A5F5;color:#FFF}.btn-primary:hover{background:#1E88E5;transform:translateY(-2px);box-shadow:0 4px 12px rgba(66,165,245,.3)}.btn-secondary{background:0 0;color:#BDBDBD;border:1px solid #3A3A3A}.btn-secondary:hover{background:#2A2A2A;color:#FFF}@media (max-width:768px){.wizard-container{padding:16px}.wizard-header h1{font-size:24px}.template-grid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.wizard-actions{flex-direction:column-reverse}.btn{width:100%;justify-content:center}}.btn:disabled{opacity:.5;cursor:not-allowed}.btn.loading{position:relative;color:transparent}.btn.loading:after{content:"";position:absolute;width:16px;height:16px;top:50%;left:50%;margin-left:-8px;margin-top:-8px;border:2px solid #fff;border-radius:50%;border-top-color:transparent;animation:spinner .6s linear infinite}@keyframes spinner{to{transform:rotate(360deg)}}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){const form=document.getElementById('step2-form');const submitBtn=form.querySelector('button[type="submit"]');const templateCards=document.querySelectorAll('.template-card');templateCards.forEach(card=>{card.addEventListener('click',function(e){if(e.target.tagName!=='INPUT'){const checkbox=this.querySelector('input[type="checkbox"]');checkbox.checked=!checkbox.checked;updateTemplateSelection()}})});const requirementItems=document.querySelectorAll('.requirement-item');requirementItems.forEach(item=>{const checkbox=item.querySelector('input[type="checkbox"]');const content=item.querySelector('.requirement-content');checkbox.addEventListener('change',function(){content.style.opacity=this.checked?'1':'0.7'})});form.addEventListener('submit',function(e){e.preventDefault();const selectedTemplates=form.querySelectorAll('input[name="templates"]:checked');if(selectedTemplates.length===0){alert('Please select at least one compliance template to continue.');return}const orgName=form.querySelector('#organization_name').value.trim();const teamSize=form.querySelector('#team_size').value;const location=form.querySelector('#primary_location').value.trim();const timezone=form.querySelector('#timezone').value;if(!orgName||!teamSize||!location||!timezone){alert('Please fill in all required fields.');return}submitBtn.disabled=true;submitBtn.classList.add('loading');form.submit()});function updateTemplateSelection(){const selectedCount=form.querySelectorAll('input[name="templates"]:checked').length;console.log(`${selectedCount} templates selected`)}const formInputs=form.querySelectorAll('input,select,textarea');formInputs.forEach(input=>{const savedValue=localStorage.getItem(`wizard_${input.name}`);if(savedValue&&input.type!=='checkbox'&&input.type!=='radio'){input.value=savedValue}input.addEventListener('change',function(){if(this.type!=='checkbox'&&this.type!=='radio'){localStorage.setItem(`wizard_${this.name}`,this.value)}})});form.addEventListener('submit',function(){formInputs.forEach(input=>{localStorage.removeItem(`wizard_${input.name}`)})})});
+</script>
+{% endblock %}
